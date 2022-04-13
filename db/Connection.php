@@ -1,8 +1,7 @@
 <?php
 namespace app\db;
 
-use app\helpers\Crypt;
-use app\helpers\Strings;
+use tiagocomti\cryptbox\Cryptbox;
 use yii\db\Exception;
 
 class Connection extends \yii\db\Connection
@@ -16,7 +15,7 @@ class Connection extends \yii\db\Connection
         return parent::__construct([
             'dsn' => $config["dsn"],
             'username' => $config["username"],
-            'password' => Crypt::easyDecrypt(trim(Strings::byteArrayToString($config["password"])),Crypt::getOurSecret()),
+            'password' => Cryptbox::decryptDBPass($config["password"]),
             'charset' => $config["charset"],
         ]);
     }
