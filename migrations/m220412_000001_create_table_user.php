@@ -11,6 +11,7 @@
 
 use app\migrations\Migration;
 use app\models\User;
+use app\helpers\Password;
 
 /*
  * m200211_000003_create_table_system
@@ -40,7 +41,7 @@ class m220412_000001_create_table_user extends Migration
             'email' => "tiago.alexandre.oliveira@hotmail.com",
             'phone' => "(31) 9 8365-8062",
             'type' => User::TYPE_ADMIN,
-            'password_hash' => \dektrium\user\helpers\Password::hash("1234567a"),
+            'password_hash' => Password::hash("1234567a"),
             'blocked_at'           => null,
             'registration_ip'      => "177.10.156.226",
             'last_login_at'      => null,

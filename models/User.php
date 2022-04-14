@@ -3,8 +3,11 @@
 
 namespace app\models;
 
-use dektrium\user\helpers\Password;
+use app\helpers\Password;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\web\BadRequestHttpException;
+use yii\web\IdentityInterface;
 
 /**
  * LoginForm is the model behind the login form. Preciso trocar DPO_id para user_id no coiso
@@ -22,7 +25,7 @@ use yii\db\ActiveRecord;
  * @property int $created_at
  * @property int $updated_at
  */
-class User extends ActiveRecord
+class User extends ActiveRecord implements IdentityInterface
 {
     const TYPE_ADMIN="admin";
     const TYPE_PARTICIPANTE = "part";
@@ -51,16 +54,49 @@ class User extends ActiveRecord
     public function behaviors() {
         return [
             'timestamp' => [
-                'class' => \yii\behaviors\TimestampBehavior::className(),
+                'class' => TimestampBehavior::class,
                 'createdAtAttribute' => 'created_at',
                 'updatedAtAttribute' => 'updated_at',
-                'value' => new \yii\db\Expression('extract(epoch FROM now())'),
-            ],
+                'value' => new \yii\db\Expression('NOW()'),
+            ]
         ];
     }
 
-    public function getMyToken()
+    /**
+     * @throws \SodiumException
+     * @throws BadRequestHttpException
+     */
+    public function getMyToken(): string
     {
-        return hash("sha512", $this->username.":".$this->password_hash);
+        $token = Tokens::getUserToken($this->id);
+        if(!$token){
+            throw new BadRequestHttpException("Erro aconteceu, olhe no log","api");
+        }
+        return $token->hash;
+    }
+
+    public static function findIdentity($id)
+    {
+        return self::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return self::findOne(["token" => $token]);
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        return false;
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        return false;
     }
 }

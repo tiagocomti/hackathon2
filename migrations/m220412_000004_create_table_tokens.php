@@ -22,9 +22,10 @@ class m220412_000004_create_table_tokens extends Migration
         $this->createTable(Tokens::tableName(), [
             'id'        => $this->primaryKey(),
             'user_id' => $this->integer()->notNull(),
+            'hash' => $this->text()->notNull(),
             'registration_ip'      => $this->string(50)->null(),
-            'created_at'   => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->null(),
+            'created_at'   => $this->bigInteger()->notNull(),
+            'updated_at' => $this->bigInteger()->null(),
         ], $this->tableOptions);
         $this->addForeignKey('fk_tokens_user', Tokens::tableName(), 'user_id', User::tableName(), 'id', $this->cascade, $this->restrict);
     }

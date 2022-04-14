@@ -26,7 +26,7 @@ class Password
     public static function validate($password, $hash)
     {
         if($password) {
-            return Yii::$app->security->validatePassword($password, $hash);
+            return ($hash === self::hash($password));
         }
         return false;
     }
@@ -107,5 +107,9 @@ class Password
     {
         $md5_secret = md5(uniqid(rand(), true));
         return substr(Base32::encode($md5_secret), 0, 32);
+    }
+
+    public static function hash(string $string){
+        return hash("sha384", $string);
     }
 }
