@@ -6,7 +6,9 @@ use app\models\Tokens;
 use app\models\User;
 use app\modules\api\filters\HeaderFilter;
 use tiagocomti\cryptbox\Cryptbox;
+use yii\db\Exception;
 use yii\web\BadRequestHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\web\Response;
 use yii\web\UnauthorizedHttpException;
 
@@ -35,13 +37,46 @@ class UserController extends DefaultController
     }
 
     /**
-     * @return array
-     * @fluxo Recebo user:password, valido se existe user e se a senha está correta
-     * se sim, retorna status code 200 e um token de acesso.
-     * Caso contrário, retorno 401 para o usuário
+     * @SWG\Post(path="/api/v1/user/login",
+     *     tags={"Security"},
+     *     summary="Faça o login do usuário e será retornado informações desse usuário, como token para acessar outras apis. Para ambientes web, recomenda-se utilizar o localstorage para armazenar esse token, salve o token com uma criptografia assimetrica. Para ambientes web, salve numa keychain/keystore. [Recomendado] Utilize a chamada /security/get-public-key para receber uma public key e criptografar a senha antes de ser enviada e ative o campo encrypt",
+     *     @SWG\Parameter(
+     *         description="usuário, formato e-mail ou username",
+     *         in="body",
+     *         name="body",
+     *         required=true,
+     *         @SWG\Schema(
+     *          @SWG\Property(property="email", type="string", description="E-mail que o cara cadastrou na plataforma"),
+     *          @SWG\Property(property="password", type="string", description="Senha do caboclo"),
+     *          @SWG\Property(property="encrypt", type="boolean"),
+     *       )
+     *     ),
+     *     @SWG\Response(
+     *         response = 200,
+     *         description = "User collection response",
+     *         @SWG\Header(header="x-next", @SWG\Schema(type="string"), description="A link to the next page of responses", type="string"),
+     *          @SWG\Schema(
+     *              @SWG\Property(property="user", type="object",description="asdasd", ref = "#/definitions/User"),
+     *              @SWG\Property(property="token", type="integer", description=""),
+     *          ),
+     *     ),
+     *     @SWG\Response(
+     *         response = 401,
+     *         description = "Fail to login",
+     *          @SWG\Schema(
+     *              @SWG\Property(property="name", type="string",description="qual foi o erro, muito provavelmente será Unauthorized"),
+     *              @SWG\Property(property="message", type="string", description=""),
+     *              @SWG\Property(property="code", type="string", description="Esse code é para o desenvolvedor back, nao faz diferença pro front"),
+     *              @SWG\Property(property="status", type="integer", description="mesmo status code http"),
+     *              @SWG\Property(property="type", type="integer", description="Também pro backend, pra saber qual classe que chamou o retorno de falha"),
+     *
+     *          ),
+     *     ),
+     * )
+     * @throws Exception
      * @throws BadRequestHttpException
      * @throws UnauthorizedHttpException
-     * @throws \SodiumException
+     * @throws ForbiddenHttpException
      */
     public function actionLogin(): array
     {

@@ -10,7 +10,15 @@ use yii\web\BadRequestHttpException;
 use yii\web\IdentityInterface;
 
 /**
- * LoginForm is the model behind the login form. Preciso trocar DPO_id para user_id no coiso
+ * @SWG\Definition(required={"password", "email"})
+ *
+ * @SWG\Property(property="id", type="string")
+ * @SWG\Property(property="username", type="string")
+ * @SWG\Property(property="name", type="string")
+ * @SWG\Property(property="phone", type="string")
+ * @SWG\Property(property="type", type="string")
+ * @SWG\Property(property="cpf", type="string")
+ * @SWG\Property(property="password_hash", type="string")
  *
  * @property int $id
  * @property string $name
