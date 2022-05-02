@@ -49,7 +49,7 @@ class UserController extends DefaultController
         if(!$user){
             throw new UnauthorizedHttpException("Login ou senha incorretos");
         }
-        return ["token" => $user->getMyToken()];
+        return ["token" => $user->getMyToken(), "type" => $user->type];
     }
 
     /**

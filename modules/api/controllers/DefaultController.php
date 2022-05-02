@@ -33,6 +33,17 @@ class DefaultController extends Controller
     {
         $behaviors = parent::behaviors();
 
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
+            'cors' => [
+                'Origin' => [ 'http://localhost:8100','http://18.217.208.6' ],
+                'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+                'Access-Control-Request-Headers' => ['*'],
+                'Access-Control-Allow-Credentials' => true,
+                'Access-Control-Max-Age' => 86400,
+            ],
+        ];
+
         $behaviors['headerFilter'] = [
             'class' => HeaderFilter::class,
             'excludedActions' => [
