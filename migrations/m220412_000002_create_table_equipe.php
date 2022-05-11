@@ -21,8 +21,8 @@ class m220412_000002_create_table_equipe extends Migration
         $this->createTable(Equipe::tableName(), [
             'id'        => $this->primaryKey(),
             'name'   => $this->string(40)->notNull(),
-            'created_at'   => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->null(),
+            'created_at'   => $this->bigInteger()->notNull(),
+            'updated_at' => $this->bigInteger()->null(),
         ], $this->tableOptions);
     }
 

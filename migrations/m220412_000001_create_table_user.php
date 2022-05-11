@@ -27,11 +27,11 @@ class m220412_000001_create_table_user extends Migration
             'phone' => $this->text()->notNull(),
             'type' => $this->string(11)->notNull(),
             'password_hash' => $this->text()->notNull(),
-            'blocked_at'           => $this->integer()->null(),
+            'blocked_at'           => $this->bigInteger()->null(),
             'registration_ip'      => $this->string(50)->null(),
-            'last_login_at'      => $this->integer()->null(),
-            'created_at'   => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->null(),
+            'last_login_at'      => $this->bigInteger()->null(),
+            'created_at'   => $this->bigInteger()->notNull(),
+            'updated_at' => $this->bigInteger()->null(),
         ], $this->tableOptions);
 
         $this->insert(User::tableName(), [

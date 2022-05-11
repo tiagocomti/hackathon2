@@ -70,15 +70,15 @@ class HeaderFilter extends Behavior
             }
         }
         $headers = Yii::$app->getRequest()->getHeaders();
-        if (!isset($headers['x-token']) && $isExclude) {
+        if (!isset($headers['token']) && $isExclude) {
             return true;
         }
-        if (!isset($headers['x-token'])) {
-            \Yii::error('Heades is missing: x-token'. " locate: ".\Yii::$app->controller->id."/".Yii::$app->controller->action->id, 'api');
+        if (!isset($headers['token'])) {
+            \Yii::error('Heades is missing: token'. " locate: ".\Yii::$app->controller->id."/".Yii::$app->controller->action->id, 'api');
             throw new UnauthorizedHttpException('Your request is invalid.');
         }
         if(!$isExclude) {
-            $user = User::validateToken($headers['x-token']);
+            $user = User::validateToken($headers['token']);
             if ($user === null) {
                 \Yii::error('UserID ou username não existe', 'api');
                 throw new UnauthorizedHttpException('Your request is invalid.');

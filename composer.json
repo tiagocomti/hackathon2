@@ -21,7 +21,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "guzzlehttp/guzzle": "~6.0",
         "swoole-foundation/yii2-swoole-extension": "^1.0",
-      "ext-json": "*"
+      "ext-json": "*",
+      "ext-sodium": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

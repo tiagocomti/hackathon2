@@ -86,6 +86,10 @@ class Strings {
         $cpf = str_replace($before, "", $cpf);
         return self::removeEspecialCharacters($cpf);
     }
+    public static function sanitizationPhone($phone){
+        $before = array('-','.','\\',"/"," ");
+        return str_replace($before, "", $phone);
+    }
 
     public static function generateApiUser()
     {

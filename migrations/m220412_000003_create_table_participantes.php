@@ -24,8 +24,8 @@ class m220412_000003_create_table_participantes extends Migration
             'id'        => $this->primaryKey(),
             'user_id'   => $this->integer()->notNull(),
             'equipe_id'   => $this->integer()->notNull(),
-            'created_at'   => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->null(),
+            'created_at'   => $this->bigInteger()->notNull(),
+            'updated_at' => $this->bigInteger()->null(),
         ], $this->tableOptions);
         $this->addForeignKey('fk_participantes_user', Participantes::tableName(), 'user_id', User::tableName(), 'id', $this->cascade, $this->restrict);
         $this->addForeignKey('fk_participantes_equipe', Participantes::tableName(), 'equipe_id', Equipe::tableName(), 'id', $this->cascade, $this->restrict);
