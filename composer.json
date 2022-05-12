@@ -21,6 +21,7 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "guzzlehttp/guzzle": "~6.0",
         "swoole-foundation/yii2-swoole-extension": "^1.0",
+        "2amigos/qrcode-library": "^2.0",
       "ext-json": "*",
       "ext-sodium": "*"
     },
