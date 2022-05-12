@@ -37,7 +37,7 @@ class EquipeController extends DefaultController
      *         response = 200,
      *         description = "User collection response",
      *          @SWG\Schema(
-     *             @SWG\Property(property="User", type="array", @SWG\Items(@SWG\Schema(ref = "#/definitions/Equipe"))),
+     *             @SWG\Property(property="user", type="array", @SWG\Items(@SWG\Schema(ref = "#/definitions/Equipe"))),
      *          ),
      *     ),
      *     @SWG\Response(
@@ -137,13 +137,13 @@ class EquipeController extends DefaultController
      *         required=true,
      *     ),
      *     @SWG\Parameter(
-     *         description="equipe",
-     *         in="body",
-     *         name="body",
+     *         description="id da equipe",
+     *         in="query",
+     *         name="id",
      *         required=true,
-     *         @SWG\Schema(
-     *          @SWG\Property(property="equipe_id", type="string"),
-     *       )
+     *         type="string",
+     *         required=true,
+     *         default="0, 1, 2, 3...."
      *     ),
      *     @SWG\Response(
      *         response = 200,
@@ -170,9 +170,9 @@ class EquipeController extends DefaultController
      * @throws UnauthorizedHttpException
      * @throws BadRequestHttpException
      */
-    public function actionGetParticipantes(){
+    public function actionGetParticipantes($equipe_id){
         $this->justStaff();
-        $equipe = Equipe::findOne(["id" => $this->_post["equipe_id"]]);
+        $equipe = Equipe::findOne(["id" => $equipe_id]);
         if(!$equipe){
             throw new BadRequestHttpException("Equipe não encontrada");
         }
@@ -204,7 +204,7 @@ class EquipeController extends DefaultController
      *         response = 200,
      *         description = "User collection response",
      *          @SWG\Schema(
-     *             @SWG\Property(property="User", type="array", @SWG\Items(@SWG\Schema(ref = "#/definitions/Equipe"))),
+     *             @SWG\Property(property="user", type="array", @SWG\Items(@SWG\Schema(ref = "#/definitions/Equipe"))),
      *          ),
      *     ),
      *     @SWG\Response(
