@@ -10,6 +10,9 @@ use yii\db\ActiveRecord;
 /**
  * @SWG\Definition(required={"name"})
  * @SWG\Property(property="name", type="string")
+ * @SWG\Property(property="id", type="string")
+ * @SWG\Property(property="created_at", type="string")
+ * @SWG\Property(property="updated_at", type="string")
  *
  * LoginForm is the model behind the login form. Preciso trocar DPO_id para user_id no coiso
  *
@@ -24,17 +27,21 @@ class Equipe extends ActiveRecord
      */
     public $users;
 
+    /**
+     * @throws \yii\db\StaleObjectException
+     */
     public function afterSave($insert, $changedAttributes){
         if(!$insert){
             foreach($this->users as $user_id){
                 $user = User::findOne(["id" => $user_id]);
                 if($user && $user->type == User::TYPE_PARTICIPANTE){
-                    if(!Participantes::findOne(["user_id"=> $user->id,"equipe_id" => $this->id])) {
-                        $participantes = new Participantes();
-                        $participantes->user_id = $user->id;
-                        $participantes->equipe_id = $this->id;
-                        $participantes->save();
+                    if($participante = Participantes::findOne(["user_id"=> $user->id])) {
+                        $participante->delete();
                     }
+                    $participantes = new Participantes();
+                    $participantes->user_id = $user->id;
+                    $participantes->equipe_id = $this->id;
+                    $participantes->save();
                 }
             }
         }

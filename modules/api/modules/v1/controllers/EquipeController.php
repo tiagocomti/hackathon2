@@ -85,6 +85,7 @@ class EquipeController extends DefaultController
      *         required=true,
      *         @SWG\Schema(
      *          @SWG\Property(property="users", type="array", description="Users_id", @SWG\Items(type="integer")),
+     *         @SWG\Property(property="equipe_id", type="string")
      *       )
      *     ),
      *     @SWG\Response(
@@ -107,10 +108,11 @@ class EquipeController extends DefaultController
      *          ),
      *     ),
      * )
-     * @return array
+     * @return bool
      * @throws BadRequestHttpException|UnauthorizedHttpException
      */
-    public function actionFill(){
+    public function actionFill(): bool
+    {
         $this->justStaff();
         $equipe = Equipe::findOne(["id" => $this->_post["equipe_id"]]);
         if(!$equipe){
@@ -234,7 +236,7 @@ class EquipeController extends DefaultController
     /**
      * @SWG\Post(path="/api/v1/equipe/get-qrcode",
      *     tags={"Equipe"},
-     *     summary="Retorna o qrcode da equipe para ser pontuada",
+     *     summary="Retorna o qrcode da equipe para ser pontuada. lembre-se de usar o <img src=' e colocar dentro do src o retorno dessa API",
      *     @SWG\Parameter(
      *         description="Token retornado na função de login",
      *         in="header",

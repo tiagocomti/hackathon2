@@ -80,9 +80,7 @@ class UserController extends DefaultController
      * @throws BadRequestHttpException|UnauthorizedHttpException
      */
     public function actionCreate(){
-        /** @var User $user */
-        $user = \Yii::$app->user->identity;
-        if(!$user->isAdmin() && !$user->isAvaliador()){throw new UnauthorizedHttpException("just admin or aval can create");}
+        $this->justStaff();
         $new_user = new User($this->_post);
         $new_user->phone = Strings::sanitizationPhone($new_user->phone);
         $new_user->password_hash = (Password::hash($new_user-> password_hash))??Password::hash(Password::generate(12));
@@ -179,11 +177,59 @@ class UserController extends DefaultController
      * @throws BadRequestHttpException|UnauthorizedHttpException
      */
     public function actionGetAll(){
-        /** @var User $user */
-        $user = \Yii::$app->user->identity;
-        if(!$user->isAdmin() && !$user->isAvaliador()){throw new UnauthorizedHttpException("just admin or avaliadores podem ver os participantes");}
+        $this->justStaff();
         return ["users" => User::find()->select(["id","username","email","type","phone"])->where(["type"=> User::TYPE_PARTICIPANTE])->all()];
 
+    }
+
+    /**
+     * @SWG\Get(path="/api/v1/user/get",
+     *     tags={"User"},
+     *     summary="Pegar só um user",
+     *     @SWG\Parameter(
+     *         description="Token retornado na função de login",
+     *         in="header",
+     *         name="token",
+     *         required=true,
+     *         type="string",
+     *         required=true,
+     *     ),
+     *     @SWG\Parameter(
+     *         description="id do usuário",
+     *         in="query",
+     *         name="id",
+     *         required=true,
+     *         type="string",
+     *         required=true,
+     *         default="0, 1, 2, 3...."
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response = 200,
+     *         description = "User collection response",
+     *          @SWG\Schema(
+     *             @SWG\Property(property="User", type="array", @SWG\Items(@SWG\Schema(ref = "#/definitions/User"))),
+     *          ),
+     *     ),
+     *     @SWG\Response(
+     *         response = 400,
+     *         description = "Bad Request",
+     *          @SWG\Schema(
+     *              @SWG\Property(property="name", type="string",description="qual foi o erro, muito provavelmente será Unauthorized"),
+     *              @SWG\Property(property="message", type="string", description=""),
+     *              @SWG\Property(property="code", type="string", description="Esse code é para o desenvolvedor back, nao faz diferença pro front"),
+     *              @SWG\Property(property="status", type="integer", description="mesmo status code http"),
+     *              @SWG\Property(property="type", type="integer", description="Também pro backend, pra saber qual classe que chamou o retorno de falha"),
+     *
+     *          ),
+     *     ),
+     * )
+     * @return array
+     * @throws BadRequestHttpException|UnauthorizedHttpException
+     */
+    public function actionGet($id){
+        $this->justStaff();
+        return ["user" => User::find()->select(["id","username","email","type","phone"])->andWhere(["id"=> $id])->all()];
     }
 
     /**
