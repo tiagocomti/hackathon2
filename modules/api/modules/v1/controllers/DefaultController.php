@@ -23,4 +23,10 @@ class DefaultController extends Controller
         $user = \Yii::$app->user->identity;
         if(!$user->isAdmin() && !$user->isAvaliador()){throw new UnauthorizedHttpException("Apenas admins ou avaliadores podem usar essa api");}
     }
+
+    protected function justAdmin(){
+        /** @var User $user */
+        $user = \Yii::$app->user->identity;
+        if(!$user->isAdmin()){throw new UnauthorizedHttpException("Apenas admins podem usar essa api");}
+    }
 }

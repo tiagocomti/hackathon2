@@ -2,20 +2,21 @@
 
 namespace app\modules\api\modules\v1\controllers;
 
-use app\models\Equipe;
+use app\models\Bases;
 use app\models\User;
 use Da\QrCode\QrCode;
+use yii\debug\models\search\Base;
 use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\UnauthorizedHttpException;
 
-class EquipeController extends DefaultController
+class BasesController extends DefaultController
 {
 
     /**
-     * @SWG\Post(path="/api/v1/equipe/create",
-     *     tags={"Equipe"},
-     *     summary="Apenas avaliadores e admins podem criar equipe",
+     * @SWG\Post(path="/api/v1/bases/create",
+     *     tags={"Bases"},
+     *     summary="Apenas avaliadores e admins podem criar bases",
      *     @SWG\Parameter(
      *         description="Token retornado na função de login",
      *         in="header",
@@ -25,7 +26,7 @@ class EquipeController extends DefaultController
      *         required=true,
      *     ),
      *     @SWG\Parameter(
-     *         description="equipe",
+     *         description="bases",
      *         in="body",
      *         name="body",
      *         required=true,
@@ -37,7 +38,7 @@ class EquipeController extends DefaultController
      *         response = 200,
      *         description = "User collection response",
      *          @SWG\Schema(
-     *             @SWG\Property(property="user", type="array", @SWG\Items(@SWG\Schema(ref = "#/definitions/Equipe"))),
+     *             @SWG\Property(property="user", type="array", @SWG\Items(@SWG\Schema(ref = "#/definitions/Bases"))),
      *          ),
      *     ),
      *     @SWG\Response(
@@ -58,18 +59,18 @@ class EquipeController extends DefaultController
      */
     public function actionCreate(){
         $this->justStaff();
-        $equipe = new Equipe($this->_post);
-        if(!$equipe->save()){
-            \Yii::error(json_encode($equipe->getErrors()), "api");
-            throw new BadRequestHttpException(json_encode($equipe->getErrors()));
+        $model = new Bases($this->_post);
+        if(!$model->save()){
+            \Yii::error(json_encode($model->getErrors()), "api");
+            throw new BadRequestHttpException(json_encode($model->getErrors()));
         }
-        return ["success" => true, "equipe" => $equipe->getAttributes()];
+        return ["success" => true, "bases" => $model->getAttributes()];
     }
 
     /**
-     * @SWG\Post(path="/api/v1/equipe/fill",
-     *     tags={"Equipe"},
-     *     summary="Adiciona usuarios a lista de participantes de uma determinada equipe",
+     * @SWG\Post(path="/api/v1/bases/fill",
+     *     tags={"Bases"},
+     *     summary="Adiciona usuarios a lista de participantes de uma determinada bases",
      *     @SWG\Parameter(
      *         description="Token retornado na função de login",
      *         in="header",
@@ -79,20 +80,20 @@ class EquipeController extends DefaultController
      *         required=true,
      *     ),
      *     @SWG\Parameter(
-     *         description="equipe",
+     *         description="bases",
      *         in="body",
      *         name="body",
      *         required=true,
      *         @SWG\Schema(
      *          @SWG\Property(property="users", type="array", description="Users_id", @SWG\Items(type="integer")),
-     *         @SWG\Property(property="equipe_id", type="string")
+     *         @SWG\Property(property="bases_id", type="string")
      *       )
      *     ),
      *     @SWG\Response(
      *         response = 200,
      *         description = "User collection response",
      *          @SWG\Schema(
-     *             @SWG\Property(property="User", type="array", @SWG\Items(@SWG\Schema(ref = "#/definitions/Equipe"))),
+     *             @SWG\Property(property="User", type="array", @SWG\Items(@SWG\Schema(ref = "#/definitions/Bases"))),
      *          ),
      *     ),
      *     @SWG\Response(
@@ -113,20 +114,20 @@ class EquipeController extends DefaultController
      */
     public function actionFill(): bool
     {
-        $this->justStaff();
-        $equipe = Equipe::findOne(["id" => $this->_post["equipe_id"]]);
-        if(!$equipe){
-            throw new BadRequestHttpException("Equipe não encontrada");
+        $this->justAdmin();
+        $base = Bases::findOne(["id" => $this->_post["base_id"]]);
+        if(!$base){
+            throw new BadRequestHttpException("base não encontrada");
         }
 
-        $equipe->users = $this->_post["users"];
-        $equipe->save();
+        $base->users = $this->_post["users"];
+        $base->save();
         return true;
     }
 
     /**
-     * @SWG\Get(path="/api/v1/equipe/get-participantes",
-     *     tags={"Equipe"},
+     * @SWG\Get(path="/api/v1/bases/get-avaliadores",
+     *     tags={"Bases"},
      *     summary="Pegar todos os usuários, vai retornar um array de usuários que são do tipo participante",
      *     @SWG\Parameter(
      *         description="Token retornado na função de login",
@@ -137,7 +138,7 @@ class EquipeController extends DefaultController
      *         required=true,
      *     ),
      *     @SWG\Parameter(
-     *         description="id da equipe",
+     *         description="id da bases",
      *         in="query",
      *         name="id",
      *         required=true,
@@ -171,18 +172,19 @@ class EquipeController extends DefaultController
      * @throws UnauthorizedHttpException
      * @throws BadRequestHttpException
      */
-    public function actionGetParticipantes($equipe_id){
+    public function actionGetAvaliadores($base_id){
         $this->justStaff();
-        $equipe = Equipe::findOne(["id" => $equipe_id]);
-        if(!$equipe){
-            throw new BadRequestHttpException("Equipe não encontrada");
+        $base = Bases::findOne(["id" => $base_id]);
+        if(!$base){
+            throw new BadRequestHttpException("base não encontrada");
         }
-        return ["users"=>$equipe->participantes];
+        return ["users"=>$base->avaliadores];
     }
+
     /**
-     * @SWG\Delete(path="/api/v1/equipe/drain",
-     *     tags={"Equipe"},
-     *     summary="Remove um grupo de usuários de uma determinada equipe",
+     * @SWG\Delete(path="/api/v1/bases/drain",
+     *     tags={"Bases"},
+     *     summary="Remove um grupo de usuários de uma determinada bases",
      *     @SWG\Parameter(
      *         description="Token retornado na função de login",
      *         in="header",
@@ -192,20 +194,20 @@ class EquipeController extends DefaultController
      *         required=true,
      *     ),
      *     @SWG\Parameter(
-     *         description="equipe",
+     *         description="bases",
      *         in="body",
      *         name="body",
      *         required=true,
      *         @SWG\Schema(
      *          @SWG\Property(property="users", type="array", description="Users_id", @SWG\Items(type="integer")),
-     *          @SWG\Property(property="equipe_id", type="string"),
+     *          @SWG\Property(property="bases_id", type="string"),
      *       )
      *     ),
      *     @SWG\Response(
      *         response = 200,
      *         description = "User collection response",
      *          @SWG\Schema(
-     *             @SWG\Property(property="user", type="array", @SWG\Items(@SWG\Schema(ref = "#/definitions/Equipe"))),
+     *             @SWG\Property(property="user", type="array", @SWG\Items(@SWG\Schema(ref = "#/definitions/Bases"))),
      *          ),
      *     ),
      *     @SWG\Response(
@@ -225,82 +227,19 @@ class EquipeController extends DefaultController
      * @throws BadRequestHttpException|UnauthorizedHttpException
      */
     public function actionDrain(){
-        $this->justStaff();
-        $equipe = Equipe::findOne(["id" => $this->_post["equipe_id"]]);
-        if(!$equipe){
-            throw new BadRequestHttpException("Equipe não encontrada");
+        $this->justAdmin();
+        $base = Bases::findOne(["id" => $this->_post["base_id"]]);
+        if(!$base){
+            throw new BadRequestHttpException("Base não encontrada");
         }
-        $equipe->removeParticipante($this->_post["users"]);
+        $base->removeParticipante($this->_post["users"]);
         return true;
     }
 
     /**
-     * @SWG\Get(path="/api/v1/equipe/get-qrcode",
-     *     tags={"Equipe"},
-     *     summary="Retorna o qrcode da equipe para ser pontuada. lembre-se de usar o <img src=' e colocar dentro do src o retorno dessa API",
-     *     @SWG\Parameter(
-     *         description="Token retornado na função de login",
-     *         in="header",
-     *         name="x-token",
-     *         required=true,
-     *         type="string",
-     *         required=true,
-     *     ),
-     *      @SWG\Parameter(
-     *         description="id da equipe",
-     *         in="query",
-     *         name="id",
-     *         required=true,
-     *         type="string",
-     *         required=true,
-     *         default="0, 1, 2, 3...."
-     *     ),
-     *     @SWG\Response(
-     *         response = 200,
-     *         description = "User collection response",
-     *          @SWG\Schema(
-     *              @SWG\Property(property="status", type="integer", description="", default="200"),
-     *              @SWG\Property(property="base", type="string", description="", default="200"),
-     *          ),
-     *     ),
-     *     @SWG\Response(
-     *         response = 400,
-     *         description = "Bad Request",
-     *          @SWG\Schema(
-     *              @SWG\Property(property="name", type="string",description="qual foi o erro, muito provavelmente será Unauthorized"),
-     *              @SWG\Property(property="message", type="string", description=""),
-     *              @SWG\Property(property="code", type="string", description="Esse code é para o desenvolvedor back, nao faz diferença pro front"),
-     *              @SWG\Property(property="status", type="integer", description="mesmo status code http"),
-     *              @SWG\Property(property="type", type="integer", description="Também pro backend, pra saber qual classe que chamou o retorno de falha"),
-     *
-     *          ),
-     *     ),
-     * )
-     * @return mixed
-     * @throws BadRequestHttpException
-     */
-    public function actionGetQrcode($equipe_id){
-        $equipe = Equipe::findOne(["id" => $equipe_id]);
-        if(!$equipe){
-            throw new BadRequestHttpException("Equipe não encontrada");
-        }
-        if(!\Yii::$app->cache->get("qrcode_".$equipe->id)) {
-            $qrCode = (new QrCode('http://jogodacidade.com.br/equipe/pontos?id='.$equipe->id))
-                ->setSize(250)
-                ->setMargin(5)
-                ->setForegroundColor(16, 133, 193);
-            $base_64 = $qrCode->writeDataUri();
-            \Yii::$app->cache->set("qrcode_".$equipe->id, $base_64, 9000);
-        }else{
-            $base_64 = \Yii::$app->cache->get("qrcode_".$equipe->id);
-        }
-        return ["base" => $base_64];
-    }
-
-    /**
-     * @SWG\Get(path="/api/v1/equipe/get-all",
-     *     tags={"Equipe"},
-     *     summary="Pegar todas as equipes e participantes de uma equipe",
+     * @SWG\Get(path="/api/v1/bases/get-all",
+     *     tags={"Bases"},
+     *     summary="Pegar todas as bases e participantes de uma bases",
      *     @SWG\Parameter(
      *         description="Token retornado na função de login",
      *         in="header",
@@ -315,7 +254,7 @@ class EquipeController extends DefaultController
      *         description = "User collection response",
      *          @SWG\Schema(
      *              @SWG\Property(property="return", type="boolean", description=""),
-     *              @SWG\Property(property="participantes", type="array",  @SWG\Items(ref="#/definitions/Equipe")),
+     *              @SWG\Property(property="participantes", type="array",  @SWG\Items(ref="#/definitions/Bases")),
      *          ),
      *     ),
      *     @SWG\Response(
@@ -336,25 +275,24 @@ class EquipeController extends DefaultController
      */
     public function actionGetAll(){
         $this->justStaff();
-        $equipes = [];
-        $model = Equipe::find()->all();
+        $bases = [];
+        $model = Bases::find()->all();
         /**
          * @var  $chave
-         * @var Equipe $equipe
+         * @var Bases $base
          */
-        foreach($model as $chave => $equipe){
-            $equipes[$chave] = $equipe->getAttributes();
-            $equipes[$chave]["participantes"] = $equipe->participantes;
-            $equipes[$chave]["pontos"] = 0.0;
+        foreach($model as $chave => $base){
+            $bases[$chave] = $base->getAttributes();
+            $bases[$chave]["avaliadores"] = $base->avaliadores;
         }
 
-        return ["equipes"=>$equipes];
+        return ["bases"=>$bases];
     }
 
     /**
-     * @SWG\Get(path="/api/v1/equipe/get",
-     *     tags={"Equipe"},
-     *     summary="Pegar todas as equipes e participantes de uma equipe",
+     * @SWG\Get(path="/api/v1/bases/get",
+     *     tags={"Bases"},
+     *     summary="Pegar todas as bases e participantes de uma bases",
      *     @SWG\Parameter(
      *         description="Token retornado na função de login",
      *         in="header",
@@ -365,7 +303,7 @@ class EquipeController extends DefaultController
      *     ),
      *
      *     @SWG\Parameter(
-     *         description="id da equipe",
+     *         description="id da bases",
      *         in="query",
      *         name="id",
      *         required=true,
@@ -379,7 +317,7 @@ class EquipeController extends DefaultController
      *         description = "User collection response",
      *          @SWG\Schema(
      *              @SWG\Property(property="return", type="boolean", description=""),
-     *              @SWG\Property(property="participantes", type="array",  @SWG\Items(ref="#/definitions/Equipe")),
+     *              @SWG\Property(property="participantes", type="array",  @SWG\Items(ref="#/definitions/Bases")),
      *          ),
      *     ),
      *     @SWG\Response(
@@ -399,21 +337,18 @@ class EquipeController extends DefaultController
      * @throws BadRequestHttpException|UnauthorizedHttpException
      */
     public function actionGet($id){
+        $this->justStaff();
         /** @var User $user */
         $user = \Yii::$app->user->identity;
-        $model = Equipe::findOne(["id" => $id]);
+        $model = Bases::findOne(["id" => $id]);
         if(!$model){
-            throw new BadRequestHttpException("Equipe não encontrada");
-        }
-        if($user->type == User::TYPE_PARTICIPANTE && $user->equipe->id != $model->id){
-            throw new UnauthorizedHttpException("Essa não é sua equipe, jão");
+            throw new BadRequestHttpException("Base não encontrada");
         }
 
-        $equipe = $model->getAttributes();
-        $equipe["participantes"] = $model->participantes;
-        $equipe["pontos"] = 0.0;
+        $base = $model->getAttributes();
+        $base["avaliadores"] = $model->avaliadores;
 
-        return ["equipes"=>$equipe];
+        return ["base"=>$base];
     }
 
 }

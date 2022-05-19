@@ -113,6 +113,7 @@ class UserController extends DefaultController
      *          @SWG\Schema(
      *              @SWG\Property(property="user", type="object",description="asdasd", ref = "#/definitions/User"),
      *              @SWG\Property(property="token", type="integer", description=""),
+     *              @SWG\Property(property="equipe_id", type="integer", description=""),
      *          ),
      *     ),
      *     @SWG\Response(
@@ -138,7 +139,7 @@ class UserController extends DefaultController
         if(!$user){
             throw new UnauthorizedHttpException("Login ou senha incorretos");
         }
-        return ["token" => $user->getMyToken(), "type" => $user->type];
+        return ["user"=>$user->getAttributes(null,["password_hash"]),"token" => $user->getMyToken(),"equipe_id" => $user->equipe->id];
     }
     /**
      * @SWG\Get(path="/api/v1/user/get-all",
@@ -151,6 +152,16 @@ class UserController extends DefaultController
      *         required=true,
      *         type="string",
      *         required=true,
+     *     ),
+     *
+     *      @SWG\Parameter(
+     *         description="Filtro de tipos de usuários",
+     *         in="query",
+     *         name="id",
+     *         required=true,
+     *         type="string",
+     *         required=true,
+     *         default="TYPE_PARTICIPANTE = 'part'; TYPE_AVALIADOR = 'avali'"
      *     ),
      *
      *     @SWG\Response(
@@ -176,9 +187,19 @@ class UserController extends DefaultController
      * @return array
      * @throws BadRequestHttpException|UnauthorizedHttpException
      */
-    public function actionGetAll(){
+    public function actionGetAll($type = User::TYPE_PARTICIPANTE){
         $this->justStaff();
-        return ["users" => User::find()->select(["id","username","email","type","phone"])->where(["type"=> User::TYPE_PARTICIPANTE])->all()];
+        $users_array=[];
+        $users =  User::find()->select(["id","username","email","type","phone"])->where(["type"=>$type])->all();
+        /**
+         * @var  $chave
+         * @var User $user
+         */
+        foreach($users as $chave => $user) {
+            $users_array[$chave] = $user->getAttributes(null, ["password_hash"]);
+            $users_array[$chave]["equipe"] = ($user->equipe)??[];
+        }
+        return ["users" =>$users_array];
 
     }
 
@@ -229,7 +250,10 @@ class UserController extends DefaultController
      */
     public function actionGet($id){
         $this->justStaff();
-        return ["user" => User::find()->select(["id","username","email","type","phone"])->andWhere(["id"=> $id])->all()];
+        /** @var User $user */
+        $user = User::find()->select(["id","username","email","type","phone"])->andWhere(["id"=> $id])->one()->getAttributes();
+        $user["equipe"] = $user->equipe;
+        return ["user" => $user];
     }
 
     /**
