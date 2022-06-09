@@ -139,7 +139,7 @@ class EquipeController extends DefaultController
      *     @SWG\Parameter(
      *         description="id da equipe",
      *         in="query",
-     *         name="id",
+     *         name="equipe_id",
      *         required=true,
      *         type="string",
      *         required=true,
@@ -177,7 +177,7 @@ class EquipeController extends DefaultController
         if(!$equipe){
             throw new BadRequestHttpException("Equipe não encontrada");
         }
-        return ["users"=>$equipe->participantes];
+        return ["participantes"=>$equipe->participantes];
     }
     /**
      * @SWG\Delete(path="/api/v1/equipe/drain",
@@ -284,17 +284,8 @@ class EquipeController extends DefaultController
         if(!$equipe){
             throw new BadRequestHttpException("Equipe não encontrada");
         }
-        if(!\Yii::$app->cache->get("qrcode_".$equipe->id)) {
-            $qrCode = (new QrCode('http://jogodacidade.com.br/equipe/pontos?id='.$equipe->id))
-                ->setSize(250)
-                ->setMargin(5)
-                ->setForegroundColor(16, 133, 193);
-            $base_64 = $qrCode->writeDataUri();
-            \Yii::$app->cache->set("qrcode_".$equipe->id, $base_64, 9000);
-        }else{
-            $base_64 = \Yii::$app->cache->get("qrcode_".$equipe->id);
-        }
-        return ["base" => $base_64];
+
+        return ["base" => $equipe->getQrcode()];
     }
 
     /**
@@ -344,7 +335,7 @@ class EquipeController extends DefaultController
          */
         foreach($model as $chave => $equipe){
             $equipes[$chave] = $equipe->getAttributes();
-            $equipes[$chave]["participantes"] = $equipe->participantes;
+            $equipes[$chave]["num_participantes"] = (is_array($equipe->participantes))?count($equipe->participantes):0;
             $equipes[$chave]["pontos"] = 0.0;
         }
 

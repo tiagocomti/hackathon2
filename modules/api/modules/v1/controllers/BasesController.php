@@ -86,7 +86,7 @@ class BasesController extends DefaultController
      *         required=true,
      *         @SWG\Schema(
      *          @SWG\Property(property="users", type="array", description="Users_id", @SWG\Items(type="integer")),
-     *         @SWG\Property(property="bases_id", type="string")
+     *         @SWG\Property(property="base_id", type="integer")
      *       )
      *     ),
      *     @SWG\Response(
@@ -140,7 +140,7 @@ class BasesController extends DefaultController
      *     @SWG\Parameter(
      *         description="id da bases",
      *         in="query",
-     *         name="id",
+     *         name="base_id",
      *         required=true,
      *         type="string",
      *         required=true,
@@ -178,7 +178,7 @@ class BasesController extends DefaultController
         if(!$base){
             throw new BadRequestHttpException("base não encontrada");
         }
-        return ["users"=>$base->avaliadores];
+        return ["avaliadores"=>$base->avaliadores];
     }
 
     /**
@@ -200,7 +200,7 @@ class BasesController extends DefaultController
      *         required=true,
      *         @SWG\Schema(
      *          @SWG\Property(property="users", type="array", description="Users_id", @SWG\Items(type="integer")),
-     *          @SWG\Property(property="bases_id", type="string"),
+     *          @SWG\Property(property="base_id", type="string"),
      *       )
      *     ),
      *     @SWG\Response(

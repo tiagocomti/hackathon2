@@ -101,9 +101,8 @@ class UserController extends DefaultController
      *         name="body",
      *         required=true,
      *         @SWG\Schema(
-     *          @SWG\Property(property="email", type="string", description="E-mail que o cara cadastrou na plataforma"),
+     *          @SWG\Property(property="username", type="string", description="E-mail que o cara cadastrou na plataforma"),
      *          @SWG\Property(property="password", type="string", description="Senha do caboclo"),
-     *          @SWG\Property(property="encrypt", type="boolean"),
      *       )
      *     ),
      *     @SWG\Response(
@@ -157,7 +156,7 @@ class UserController extends DefaultController
      *      @SWG\Parameter(
      *         description="Filtro de tipos de usuários",
      *         in="query",
-     *         name="id",
+     *         name="type",
      *         required=true,
      *         type="string",
      *         required=true,
@@ -190,7 +189,7 @@ class UserController extends DefaultController
     public function actionGetAll($type = User::TYPE_PARTICIPANTE){
         $this->justStaff();
         $users_array=[];
-        $users =  User::find()->select(["id","username","email","type","phone"])->where(["type"=>$type])->all();
+        $users =  User::find()->select(["id","username","email","type","phone","name"])->where(["type"=>$type])->all();
         /**
          * @var  $chave
          * @var User $user

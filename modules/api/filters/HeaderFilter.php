@@ -2,6 +2,7 @@
 
 namespace app\modules\api\filters;
 
+use app\helpers\Strings;
 use app\models\Mattermost;
 use app\models\User;
 use Yii;
@@ -73,13 +74,16 @@ class HeaderFilter extends Behavior
         if (!isset($headers['token']) && $isExclude) {
             return true;
         }
-        if (!isset($headers['token'])) {
+        if (!isset($headers['token']) || $headers["token"] == "") {
             \Yii::error('Heades is missing: token'. " locate: ".\Yii::$app->controller->id."/".Yii::$app->controller->action->id, 'api');
+            throw new UnauthorizedHttpException('Your request is invalid.');
+        }
+        if(Strings::isBinary($headers['token'])){
             throw new UnauthorizedHttpException('Your request is invalid.');
         }
         if(!$isExclude) {
             $user = User::validateToken($headers['token']);
-            if ($user === null) {
+            if ($user === null || $user === false) {
                 \Yii::error('UserID ou username não existe', 'api');
                 throw new UnauthorizedHttpException('Your request is invalid.');
             }

@@ -87,7 +87,7 @@ class Strings {
         return self::removeEspecialCharacters($cpf);
     }
     public static function sanitizationPhone($phone){
-        $before = array('-','.','\\',"/"," ");
+        $before = array('(',')','-','.','\\',"/"," ");
         return str_replace($before, "", $phone);
     }
 

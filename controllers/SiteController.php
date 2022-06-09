@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Equipe;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
@@ -69,5 +70,16 @@ class SiteController extends Controller
                 'class' => 'yii\web\ErrorAction',
             ],
         ];
+    }
+
+    public function actionGetAllQrcodes(){
+        $this->layout = false;
+        $array_equipes = [];
+        $equipes = Equipe::find()->all();
+        /** @var Equipe $equipe */
+        foreach ($equipes as $equipe) {
+            $array_equipes[] = ["id" => $equipe->id,"name" => $equipe->name,"base_64" => $equipe->getQrcode()];
+        }
+        return $this->render('get-all-qrcodes',["equipes" => $array_equipes]);
     }
 }

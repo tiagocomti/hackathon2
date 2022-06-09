@@ -34,7 +34,7 @@ class Avaliadores extends ActiveRecord
      */
     public function getBase()
     {
-        return $this->hasOne(Bases::className(), ['base_id' => 'id']);
+        return $this->hasOne(Bases::className(), ['id'=>'base_id']);
     }
 
     public function behaviors() {
