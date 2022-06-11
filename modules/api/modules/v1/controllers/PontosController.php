@@ -6,6 +6,7 @@ use app\models\Equipe;
 use app\models\Pontos;
 use app\models\User;
 use yii\web\BadRequestHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
 
@@ -140,26 +141,20 @@ class PontosController extends DefaultController
         if(!$equipe){
             throw new NotFoundHttpException("Equipe nao encontrada");
         }
-
-        $where = ["equipe_id"=>$equipe_id];
-
-        if($user->isAvaliador()){
-            $where["base_id"] = $user->base->id;
-        }
-        if(!$user->isParticipante()){
-            $where["avaliador_id"] = $user->id;
+        if($user->isParticipante() && $equipe->id != $user->equipe->id){
+            throw new ForbiddenHttpException("Essa não é sua equipe em amiguinho");
         }
 
         $pontos = [];
         $model = Pontos::find();
-        if($user->isAvaliador()){
+        if($user->hasBase() && ($user->isAvaliador())){
             $model->orWhere(["base_id" => $user->base->id]);
         }
-        if(!$user->isParticipante()){
+        if(!$user->isParticipante() && !$user->isAdmin()){
             $model->orWhere(["avaliador_id" => $user->id]);
         }
         $model->andWhere(["equipe_id" => $equipe_id]);
-        $model->all();
+
 
         /** @var Pontos $ponto */
         $contador = 0;
@@ -170,6 +165,6 @@ class PontosController extends DefaultController
             $pontos[$contador]["tipo"] =($ponto->is_base)?"Pontuação de base":"Penalidade";
             $contador ++;
         }
-        return ["pontos" => $pontos,"equipe" => $equipe->name] ;
+        return ["pontos" => $pontos,"equipe" => $equipe->name,"has_base"=> $user->hasBase(),"role"=>$user->type] ;
     }
 }

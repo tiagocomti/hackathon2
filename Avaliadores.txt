@@ -1,0 +1,48 @@
+Marcel_107 | Café Nice | 31 98814-6004
+Aninha_21 | Café Nice | 31 9 7570-3425
+Nayara_21 | Café Nice | 31 9 94430-2896
+Olair_98 | Café Nice | 31 9 8937-0653
+
+Carol_21 | Ki Delicia | 31 9 8417-9357
+Marcio_118 | Ki Delicia | 31 9 9196-1630
+Ceci_98 | Ki Delicia | 31 9 9990-0738
+Gabriel_68 | Ki Delicia | 31 9 8564-9190
+
+Mudo_21 | Nonô | 31 9 8482-8692
+Elenyn_83 | Nonô | 31 9 9536-5060
+Ana Luiza_23 | Nonô | 31 9 8445-8034
+Esquisito_45 | Nonô | 31 9 8301-3121
+
+Magda_21 | Cantina do Lucas | 31 9 9517-4977
+Matheus_107 | Cantina do Lucas | 31 9 9339-0577
+Gabi_21	| Cantina do Lucas | 31 9 8259-7125
+Cinthia_83	| Cantina do Lucas |
+
+Welberte_21 | Café Palhares | 31 9 7163-3863
+Marian_13 | Café Palhares | 31 9 9178-8496
+Rafaela_21 | Café Palhares | 31 9 7350-2861
+
+Erika_7 | Xodó | 31 9 9237-2926
+Leticia_21	| Xodó | 31 9 8767-8500
+Fabricio_101 | Xodó | 31 9 8812-0921
+Rosana_21 | Xodó | 31 9 8385-6009
+
+Luis_107 | Rest. do Porto | 31 9 8802-0020
+Lucas_21 | Rest. do Porto | 31 9 7129-5376
+Massa_107 | Rest. do Porto |31 9 8786-5822
+Andreia_21 | Rest. do Porto |31 9 9798-7760
+
+Paulo Henrique_107 | Marília de Dirceu | 31 9 9155-4626
+Dhiego_120 | Marília de Dirceu | 37 9 9664-7249
+Debiane_68 | Marília de Dirceu |
+Gabriel_23 | Marília de Dirceu | 31 9 9774-7736
+
+Felipe_101 | Pastelaria Ouvidor | 31 9 9233-6411
+Ivan_98 | Pastelaria Ouvidor | 31 9 9808-5691
+Francisca_21 | Pastelaria Ouvidor | 31 9 7568-8363
+Diego_101 | Pastelaria Ouvidor |
+
+Winkler_21 | São Domingos | 31 9 7302-8427
+Toninho_101 | São Domingos | 31 9 8877-5154
+Luiz_7 | São Domingos | 31 9 9266-0205
+Lucas_186 | São Domingos | 31 9 7519-4418

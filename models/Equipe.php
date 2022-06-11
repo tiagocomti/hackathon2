@@ -106,4 +106,14 @@ class Equipe extends ActiveRecord
         }
         return $base_64;
     }
+
+    public function getPontos(){
+        $soma = 0;
+        $pontos = Pontos::find()->andWhere(["equipe_id"=>$this->id])->all();
+        /** @var Pontos $ponto */
+        foreach ($pontos as $ponto){
+            $soma += ((int)$ponto->pontos+(int)$ponto->pontos_dicas);
+        }
+        return $soma;
+    }
 }
