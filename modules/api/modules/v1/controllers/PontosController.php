@@ -155,7 +155,7 @@ class PontosController extends DefaultController
         }
         $model->andWhere(["equipe_id" => $equipe_id]);
 
-
+        $pontuacao_total = 0;
         /** @var Pontos $ponto */
         $contador = 0;
         foreach($model->all() as $ponto){
@@ -163,8 +163,9 @@ class PontosController extends DefaultController
             $pontos[$contador]["avaliador"] = $ponto->avaliador->name;
             $pontos[$contador]["base"] = ($ponto->is_base)?$ponto->base->name:"Staff";
             $pontos[$contador]["tipo"] =($ponto->is_base)?"Pontuação de base":"Penalidade";
+            $pontuacao_total += ((int)$ponto->pontos+(int)$ponto->pontos_dicas);
             $contador ++;
         }
-        return ["pontos" => $pontos,"equipe" => $equipe->name,"has_base"=> $user->hasBase(),"role"=>$user->type] ;
+        return ["pontos" => $pontos,"equipe" => $equipe->name,"has_base"=> $user->hasBase(),"role"=>$user->type,"total" =>$pontuacao_total] ;
     }
 }
