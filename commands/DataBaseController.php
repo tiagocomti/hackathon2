@@ -177,10 +177,10 @@ class DataBaseController extends Controller
         if ($handle) {
             while (($line = fgets($handle)) !== false) {
                 if(trim($line) !== ""){
-                    $explode = explode("|", $line);
-                    $acesso = Trim($explode[0]);
-                    $telefone =Strings::sanitizationPhone(trim($explode[1]));
-                    $whatsapp = "https://api.whatsapp.com/send?phone=55".$telefone."&text=Boa%20noite%20monitor%28a%29%21%20Bem-vindo%28a%29%20ao%20https%3A%2F%2Fjogodacidade.app.%20Seu%20acesso%20foi%20criado%20para%20monitorar%20a%20pontua%C3%A7%C3%A3o%20da%20sua%20patrulha%20e%20visualizar%20seu%20QRcode%20de%20uma%20forma%20facil%20e%20r%C3%A1pida.%20Acesse%20com%20esses%20dados%3A".urlencode($acesso);
+                    $explode = explode("-", $line);
+                    list($user, $senha, $telefone) = $explode;
+                    $telefone =Strings::sanitizationPhone(trim($telefone));
+                    $whatsapp = "https://api.whatsapp.com/send?phone=55".$telefone."&text=Ol%C3%A1%2C%20boa%20tarde.%0A%0AAqui%20%C3%A9%20o%20Tiago%20da%20FreeBSD%20Brasil%2C%20segue%20sua%20senha%20de%20digest.%20O%20seu%20login%20foi%20enviado%20por%20outro%20canal%20de%20comunica%C3%A7%C3%A3o%0A%0ASenha%3A".urlencode($senha);
                     echo $whatsapp;
                     echo "\n";
                     echo "\n";
