@@ -4,6 +4,7 @@
  *
  * It's your secret to do a symmetric cryptography. If you want to change it use this: ./yii byte-array/encode {NEW_SECRET} and paste it here.
  *
+ *
  * PS: your key need to be a 32bytes key
  */
 return [
