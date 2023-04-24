@@ -18,6 +18,7 @@ use yii\db\ActiveRecord;
  *
  * @property string $name
  * @property string $id
+ * @property string $ramo
  * @property string|null $updated_at
  * @property string|null $created_at
  * @property User[] $avaliadores

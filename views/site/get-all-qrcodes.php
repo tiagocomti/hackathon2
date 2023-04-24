@@ -4,6 +4,6 @@
  */
 
 foreach ($equipes as $equipe){?>
-    Equipe: <?=$equipe["name"]?> ID: <?=$equipe["id"]?> <br/>
+    Equipe: <?=$equipe["name"]?> [Ramo: <?=$equipe["ramo"]?>] ID: <?=$equipe["id"]?> <br/>
     <img src="<?=$equipe["base_64"]?>" alt=""/><br/>
 <?php }

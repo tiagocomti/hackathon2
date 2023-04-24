@@ -44,7 +44,7 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const TYPE_ADMIN="admin";
     const TYPE_PARTICIPANTE = "part";
-        const TYPE_AVALIADOR = "avali";
+    const TYPE_AVALIADOR = "avali";
 
     /**
      * @param $username

@@ -69,6 +69,10 @@ class PontosController extends DefaultController
         if(!isset($user->base) && $is_base){
             throw new BadRequestHttpException("User não tem base vinculado");
         }
+        $chegada = $this->_post["chegada"];
+        if($this->_post["chegada"] == ""){
+            $chegada = date("H:i:s");
+        }
         $model = Pontos::findOne(["base_id" => $user->base->id, "equipe_id" => $this->_post["equipe_id"]]);
         if(!$model || $this->_post["new"]){
             $model = new Pontos();
@@ -76,7 +80,7 @@ class PontosController extends DefaultController
         }
         $model->is_base = $is_base;
         $model->avaliador_id = $user->id;
-        $model->chegada = $this->_post["chegada"];
+        $model->chegada = $chegada;
         $model->pontos = (int) $this->_post["pontos"];
         $model->pontos_dicas = (int) $this->_post["pontos_dicas"];
         $model->observacao = $this->_post["observacao"];
@@ -162,10 +166,10 @@ class PontosController extends DefaultController
             $pontos[$contador] = $ponto->getAttributes();
             $pontos[$contador]["avaliador"] = $ponto->avaliador->name;
             $pontos[$contador]["base"] = ($ponto->is_base)?$ponto->base->name:"Staff";
-            $pontos[$contador]["tipo"] =($ponto->is_base)?"Pontuação de base":"Penalidade";
+            $pontos[$contador]["tipo"] =($ponto->is_base)?"Pontuação de base":"Prévia";
             $pontuacao_total += ((int)$ponto->pontos+(int)$ponto->pontos_dicas);
             $contador ++;
         }
-        return ["pontos" => $pontos,"equipe" => $equipe->name,"has_base"=> $user->hasBase(),"role"=>$user->type,"total" =>$pontuacao_total] ;
+        return ["pontos" => $pontos,"equipe" => $equipe->name,"has_base"=> $user->hasBase(),"role"=>$user->type,"total" =>$pontuacao_total,"minha_base"=>$user->base->name] ;
     }
 }

@@ -1,0 +1,20 @@
+----senior
+0|Patrulha1 (reserva)|Coringa5
+0|Patrulha2 (reserva)|Coringa6
+0|Patrulha3 (reserva)|Coringa7
+0|Patrulha4 (reserva)|Coringa8
+----pioneiro
+0|Clã1 (reserva)|Coringa9
+0|Clã2 (reserva)|Coringa10
+0|Clã3 (reserva)|Coringa11
+0|Clã4 (reserva)|Coringa12
+----escoteiro
+0|Patrulha escoteira 1 (reserva)|Coringa1
+0|Patrulha escoteira 2 (reserva)|Coringa2
+0|Patrulha escoteira 3 (reserva)|Coringa3
+0|Patrulha escoteira 4 (reserva)|Coringa4
+----lobinho
+0|Reserva|Matilha1 (reserva)|Coringa13
+0|Reserva|Matilha2 (reserva)|Coringa14
+0|Reserva|Matilha3 (reserva)|Coringa15
+0|Reserva|Matilha4 (reserva)|Coringa16

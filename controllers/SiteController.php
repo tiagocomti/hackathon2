@@ -72,13 +72,14 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionGetAllQrcodes(){
+    public function actionGetAllQrcodes($reserva = false){
         $this->layout = false;
         $array_equipes = [];
-        $equipes = Equipe::find()->all();
+        $condition = ['like', 'name', "%"."reserva" . '%', false];
+        $equipes = Equipe::find()->andWhere($condition)->all();
         /** @var Equipe $equipe */
         foreach ($equipes as $equipe) {
-            $array_equipes[] = ["id" => $equipe->id,"name" => $equipe->name,"base_64" => $equipe->getQrcode()];
+            $array_equipes[] = ["id" => $equipe->id,"name" => $equipe->name, "ramo" => ucfirst($equipe->ramo),"base_64" => $equipe->getQrcode()];
         }
         return $this->render('get-all-qrcodes',["equipes" => $array_equipes]);
     }

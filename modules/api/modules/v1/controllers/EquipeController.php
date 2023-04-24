@@ -3,6 +3,7 @@
 namespace app\modules\api\modules\v1\controllers;
 
 use app\models\Equipe;
+use app\models\Pontos;
 use app\models\User;
 use Da\QrCode\QrCode;
 use yii\helpers\Url;
@@ -326,9 +327,15 @@ class EquipeController extends DefaultController
      * @throws UnauthorizedHttpException
      */
     public function actionGetAll(){
+        /** @var User $user */
+        $where=false;
+        $user = \Yii::$app->user->identity;
         $this->justStaff();
         $equipes = [];
-        $model = Equipe::find()->all();
+        if($user->base && $user->base->ramo){
+            $where = ["ramo" => $user->base->ramo];
+        }
+        $model = Equipe::find()->andWhere($where)->orderBy("name ASC")->all();
         /**
          * @var  $chave
          * @var Equipe $equipe
@@ -407,6 +414,7 @@ class EquipeController extends DefaultController
         $equipe = $model->getAttributes();
         $equipe["participantes"] = $model->participantes;
         $equipe["pontos"] = 0.0;
+        $equipe["minha_base"] = $user->base->name;
 
         return ["equipes"=>$equipe];
     }

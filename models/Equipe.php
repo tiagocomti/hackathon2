@@ -19,10 +19,15 @@ use yii\db\ActiveRecord;
  *
  * @property string $name
  * @property string $id
+ * @property string $ramo
  * @property User[] $participantes
  */
 class Equipe extends ActiveRecord
 {
+    const RAMO_SENIOR = 'senior';
+    const RAMO_LOBO = 'lobinho';
+    const RAMO_ESCOTEIRO = 'escoteiro';
+    const RAMO_PIO = 'pioneiro';
     /**
      * @var User
      */
@@ -32,7 +37,7 @@ class Equipe extends ActiveRecord
      * @throws \yii\db\StaleObjectException
      */
     public function afterSave($insert, $changedAttributes){
-        if(!$insert){
+        if($insert){
             foreach($this->users as $user_id){
                 $user = User::findOne(["id" => $user_id]);
                 if($user && $user->type == User::TYPE_PARTICIPANTE){

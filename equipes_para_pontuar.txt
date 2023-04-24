@@ -1,0 +1,217 @@
+----lobinho
+7|Abangani |Amarela|5
+7|Abangani |Branca|5
+7|Abangani |Preta|0
+7|Seeonee|Lobo Cinzento|0
+7|Seeonee|Lobo Gris |2
+7|Seeonee|Lobo Guará|0
+13|SEEONEE|AMARELA|0
+13|SEEONEE|BRANCA|0
+21|Flor de Lis|Preta|5
+21|Flor de Lis|Vermelha|5
+21|Lobo Gris|Branca|5
+21|Lobo Gris|Vermelha|5
+23|Túnel do Morcego|Amarela|5
+23|Túnel do Morcego|Branca|5
+23|Túnel do Morcego|Cinza|5
+23|Túnel do Morcego|Marrom|5
+23|Sabiá do baleia|Amarela|5
+23|Sabiá do baleia|Marrom|5
+23|Sabiá do baleia|Preta|5
+23|Sabiá do baleia|Vermelha|5
+34|Lobo Gris|Amarela|5
+34|Lobo Gris|Vermelha|4
+46|IRMÃOS DE MOWGLI|AMARELA|5
+46|IRMÃOS DE MOWGLI|BRANCA|5
+46|IRMÃOS DE MOWGLI|CINZA|4
+52|Flor Vermelha|Branca|5
+52|Flor Vermelha|Cinza|5
+68|Irmãos de Mowgli|Preta|3
+83|Alcateia Lobo Gris|Amarela|5
+83|Alcateia Lobo Gris|Cinza|5
+94|Cruzeiro do Sul|Branca|5
+94|Cruzeiro do Sul|Cinza|5
+94|Cruzeiro do Sul|Preta|3
+97|Lobo Guará |Amarela|0
+98|CAIO VIANNA MARTINS|AMARELA|2
+98|CAIO VIANNA MARTINS|CINZA|0
+106|Lobo Guara|Preta |5
+106|Lobo Guara |Vermelha|5
+107|Cruzeiro do Sul|Amarela|5
+107|Cruzeiro do Sul|Branca|5
+107|Cruzeiro do Sul|Marrom|5
+107|Cruzeiro do Sul|Vermelha|5
+107|Lobo Guara|Branca|5
+107|Lobo Guara|Cinza|5
+107|Lobo Guara|Preta|5
+107|Lobo Guara|Vermelha|5
+107|PANTERA NEGRA|AMARELA|5
+107|PANTERA NEGRA|BRANCA|5
+107|PANTERA NEGRA|MARROM|5
+107|Pantera Negra|Preta|5
+109|Lobo Dourado|PRETA|5
+109|LOBO DOURADO|BRANCA|5
+113|Lobo Diamante|Amarela|5
+113|Lobo Diamante|Cinza|5
+113|Lobo Diamante|Preta|5
+118|Lobinhos  em ação|preta|5
+118|Lobinhos em Ação|Branca|0
+118|LOBINHOS EM AÇÃO|CINZA|0
+118|Lobinhos em ação|Vermelha|0
+139|CHEFE ROMERO|PRETA|0
+139|CHEFE ROMERO|VERMELHA|5
+149|FILHOTES DA SELVA|BRANCA|0
+149|FILHOTES DA SELVA|PRETA|5
+149|FILHOTES DA SELVA|VERMELHA|0
+155|KOTICK|BRANCA|5
+186|Seeonee|Marrom|5
+186|Amigos da Selva|BRANCA|5
+186|Amigos da Selva|Marrom|5
+186|Amigos da Selva|Preta|5
+188|Amigos da Jangal|Vermelha|0
+188|AMIGOS DA JANGAL|AMARELA|0
+188|Amigos da Jangal|Preta|0
+205|JATAÍ|VERMELHA|0
+----senior
+7|Karajá|5
+7|Pataxó|5
+7|Maxacali|5
+13|Guajá|5
+21|Sanumá|5
+21|Maxacali|5
+21|Xavante|4
+23|Jívaros|5
+23|Krahô|5
+23|Marajó|5
+23|Kaxinauá|5
+23|Maxacali|5
+23|Krenak|5
+39|Agulhas Negras|4
+46|GALIBÍ|5
+46|TXUCARRAMÃE|3
+46|KRENAK|0
+68|Kaingang|2
+77|Dinizulu|0
+94|Matipu|2
+97|Mawé|5
+98|Açu-Guarini|5
+106|Kaiapos e akame|5
+107|Apiaká|5
+107|Kanoê|5
+107|Maxakali|5
+107|Potiguara|5
+107|Txucarramãe|5
+107|Kreen-Akarôre|5
+109|YANOMANI|1
+113|MAXAKALI|0
+118|kilaueia|0
+118|Tsunami|5
+118|Yakecan|5
+120|Kanoê|5
+120|Kampa|5
+139|Karipuna|0
+139|Purys|5
+149|KARIPUNA|5
+149|PALIKUR|5
+155|CERBERUS|0
+188|Caraça|5
+----pioneiro
+7|Itacolomy|5
+23|Zulu|5
+23|MacSmyth |5
+23|Cavaleiros de BP|5
+39|Pendragon|0
+46|Dragões do Ocidente|5
+94|Vanir|5
+106|Excalibur|5
+107|Hades|5
+107|Poseidon|5
+107|Zeus|5
+155|EXCALYBUR|0
+186|A Guarda do Leão|5
+----escoteiro
+7|CORUJA|5
+7|CUCO|5
+7|Águia|0
+7|Condor|5
+7|Cruzeiro do Sul|5
+7|Falcão|5
+7|GAVIÃO|5
+7|Tucano|5
+7|PICA-PAU|5
+7|pombo|5
+13|Águia|3
+13|Lobo|0
+21|Águia|4
+21|Harpia|5
+21|Jaguatirica|5
+21|Serpente Alada|5
+23|Águia|5
+23|Coruja|5
+23|Draco|5
+23|Gavião|5
+23|Hydra|5
+23|Jaguar|5
+23|Leopardo|5
+23|Lupus|5
+23|Órion|5
+23|Raposa|5
+46|ALDEBARÃ|5
+46|AQUARIUS|5
+46|ARGOS|0
+46|Canguru|5
+46|Capivara|5
+46|Guepardo|5
+52|Touro|5
+68|Fênix|0
+68|Pegasus|0
+68|Perseus|1
+77|Coruja|5
+77|Falcão|4
+83|Escorpião|5
+83|Pantera|5
+94|Leão|3
+94|Tigre|4
+97|Gavião|0
+97|Pegasus|5
+98|Águia|5
+98|Morcego|5
+98|Tigre|3
+106|Aguia|5
+106|Leopardo|5
+106|Tauros |5
+107|Centauros|5
+107|GAVIÃO|5
+107|NAJA|5
+107|Fênix|5
+107|Morcego|5
+107|Panda|5
+107|Pantera|5
+107|Perseus |5
+107|RAPOSA|5
+107|Tigre|5
+107|TOURO|5
+109|TOURO|5
+113|LEÃO|5
+113|TIGRE|3
+117|Puma |0
+118|Coiote |5
+118|falcão|5
+118|fenix|5
+118|Pantera|2
+120|Lobo|2
+120|Maçarico|5
+139|Fenix|5
+139|Pantera|5
+139|Tigre|5
+149|ÁGUIA|0
+149|ONÇA PINTADA|5
+149|SUCURI|5
+155|LEÃO|0
+177|Pegasus |5
+186|Cobra Coral|5
+186|Coruja|5
+186|Harpia|5
+186|Tucano|5
+188|Orion |1
+188|Pantera|0
