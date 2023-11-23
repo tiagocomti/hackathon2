@@ -75,10 +75,12 @@ class SiteController extends Controller
     public function actionGetAllQrcodes($reserva = false){
         $this->layout = false;
         $array_equipes = [];
-        $condition = ['like', 'name', "%"."reserva" . '%', false];
-        $equipes = Equipe::find()->andWhere($condition)->all();
+//        $condition = ['like', 'name', "%"."reserva" . '%', false];
+//        $condition = ['like', 'name', "%"."reserva" . '%', false];
+        $equipes = Equipe::find()->all();
         /** @var Equipe $equipe */
         foreach ($equipes as $equipe) {
+            $equipe->ramo='senior';
             $array_equipes[] = ["id" => $equipe->id,"name" => $equipe->name, "ramo" => ucfirst($equipe->ramo),"base_64" => $equipe->getQrcode()];
         }
         return $this->render('get-all-qrcodes',["equipes" => $array_equipes]);

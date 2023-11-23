@@ -37,14 +37,35 @@ class DataBaseController extends Controller
         $handle = fopen($path, "r");
         if ($handle) {
             while (($line = fgets($handle)) !== false) {
-                if(Equipe::findOne(["name"=>trim($line)])){
+                $linha = explode("-", trim($line));
+                list($id, $patrulha, $monitor) = $linha;
+                if(Equipe::findOne(["name"=>trim($patrulha)])){
                     continue;
                 }
+                $user = new User();
+                $user->name = $monitor;
+                $user->phone = "xxxx";
+                $user->observacoes = "Monitor(a)";
+                $user->type = User::TYPE_PARTICIPANTE;
+                $user->username = strtolower(Strings::removeEspecialCharacters($monitor)) . Password::generate(4);
+                $user->email = $user->username . "@" . "jogodacidade.app";
+                $user->password_hash = Password::hash("jogodacidade@1234567a");
+                if ($user->save()) {
+                    echo "username: " . $user->username . " - ";
+                    echo "base:" . $patrulha;
+                    echo "user:" . $user->getId();
+                    echo "\n";
+                }else{
+                    print_r($user->getErrors());
+                }
+
                 $equipe = new Equipe();
-                $equipe->name = trim($line);
+                $equipe->name = trim($patrulha);
+                $equipe->users = [$user->getId()];
                 if($equipe->save()){
                     echo "Equipe ".$equipe->name." salva com sucesso, ID: ".$equipe->id;
                     echo "\n";
+
                 }else{
                     echo "deu ruim, segue erro";
                     print_r($equipe->getErrors());
@@ -64,7 +85,7 @@ class DataBaseController extends Controller
                 $base_explode = explode("|", $line);
                 $base = new Bases();
                 $base->name = trim($base_explode[0]);
-                $base->ramo = trim($base_explode[1]);
+                $base->ramo = "senior";
                 if($base->save()){
                     echo "Base ".$base->name." salva com sucesso, ID: ".$base->id;
                     echo "\n";
@@ -297,10 +318,11 @@ class DataBaseController extends Controller
     }
 
     public function actionGenerateResult(){
-        $model = Equipe::find()->andWhere(["ramo" => Equipe::RAMO_LOBO])->all();
+        $model = Equipe::find()->andWhere(["ramo" => Equipe::RAMO_SENIOR])->all();
         /**
          * @var  $chave
          * @var Equipe $equipe
+         *
          */
         foreach($model as $chave => $equipe){
             $ponto_passaporte = Pontos::find()->andWhere(["equipe_id" => $equipe->id,"base_id"=>100])->all();
