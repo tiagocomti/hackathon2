@@ -119,6 +119,6 @@ class Equipe extends ActiveRecord
         foreach ($pontos as $ponto){
             $soma += ((int)$ponto->pontos+(int)$ponto->pontos_dicas);
         }
-        return $soma;
+        return ($soma < 0)?0 ." (tem pontuação negativa)":$soma;
     }
 }

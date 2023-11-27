@@ -35,12 +35,13 @@ class Pontos extends ActiveRecord
     {
         if($this->isNewRecord){
             $avaliador_atual = Avaliadores::findOne(["user_id" => $this->avaliador_id]);
-            if(!$avaliador_atual && $this->is_base){
+            if(!$avaliador_atual && $this->is_base == 1){
                 $this->addError("avaliador","Esse avaliador não existe ou não tem nenhuma base vinculada a ele");
                 return false;
             }
             $pontos = self::findOne(["base_id" => $avaliador_atual->base_id, "equipe_id" => $this->equipe_id]);
-            if ($pontos && ($this->is_base && $pontos->is_base)) {
+            if ($pontos && ($this->is_base == 1 && $pontos->is_base == 1)) {
+
                 throw new BadRequestHttpException("Ja existe avaliação dessa base");
             }
             $this->base_id = $avaliador_atual->base_id;

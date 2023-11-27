@@ -326,7 +326,7 @@ class EquipeController extends DefaultController
      * @return array
      * @throws UnauthorizedHttpException
      */
-    public function actionGetAll(){
+    public function actionGetAll($totais = false){
         /** @var User $user */
         $where=false;
         $user = \Yii::$app->user->identity;
@@ -345,10 +345,11 @@ class EquipeController extends DefaultController
             $equipes[$chave]["num_participantes"] = (is_array($equipe->participantes))?count($equipe->participantes):0;
             $equipes[$chave]["pontos_totais"] = $equipe->getPontos();
         }
-        usort($equipes, function($a, $b) {
-            return $a['pontos_totais'] <=> $b['pontos_totais'];
-        });
-        $equipes = array_reverse($equipes);
+        if($totais) {
+            usort($equipes, function ($a, $b) {
+                return $a['pontos_totais'] <=> $b['pontos_totais'];
+            });
+        }
 
         return ["equipes"=>$equipes];
     }

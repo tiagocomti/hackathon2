@@ -5,6 +5,7 @@ namespace app\modules\api\modules\v1\controllers;
 use app\models\Equipe;
 use app\models\Pontos;
 use app\models\User;
+use yii\db\Exception;
 use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -65,13 +66,17 @@ class PontosController extends DefaultController
         $this->justStaff();
         /** @var User $user */
         $user = \Yii::$app->user->identity;
-        $is_base = (bool) $this->_post["is_base"];
-        if(!isset($user->base) && $is_base){
+
+        $is_base =  (int) $this->_post["is_base"];
+        if(!isset($user->base) && $is_base == 1){
             throw new BadRequestHttpException("User não tem base vinculado");
         }
         $chegada = $this->_post["chegada"];
         if($this->_post["chegada"] == ""){
             $chegada = date("H:i:s");
+        }
+        if($this->_post["pontos"] < 0){
+            throw new BadRequestHttpException("Pontuação não pode ser negativa, caso voce seja chefe oculto, pode lançar normal o ponto que a gente ja vai subitrair");
         }
         $model = Pontos::findOne(["base_id" => $user->base->id, "equipe_id" => $this->_post["equipe_id"]]);
         if(!$model || $this->_post["new"]){
@@ -81,7 +86,7 @@ class PontosController extends DefaultController
         $model->is_base = $is_base;
         $model->avaliador_id = $user->id;
         $model->chegada = $chegada;
-        $model->pontos = (int) $this->_post["pontos"];
+        $model->pontos = ($is_base == 2)?((int)$this->_post["pontos"]*-1):(int) $this->_post["pontos"];
         $model->pontos_dicas = (int) $this->_post["pontos_dicas"];
         $model->observacao = $this->_post["observacao"];
         if($model->save()){
@@ -163,13 +168,42 @@ class PontosController extends DefaultController
         /** @var Pontos $ponto */
         $contador = 0;
         foreach($model->all() as $ponto){
+            if($ponto->is_base == 1){
+                $tipo = 'Pontuação de base';
+            }else if ($ponto->is_base ==2){
+                $tipo = 'Chefe Oculto';
+            }else{
+                $tipo = "Staff";
+            }
             $pontos[$contador] = $ponto->getAttributes();
             $pontos[$contador]["avaliador"] = $ponto->avaliador->name;
-            $pontos[$contador]["base"] = ($ponto->is_base)?$ponto->base->name:"Staff";
-            $pontos[$contador]["tipo"] =($ponto->is_base)?"Pontuação de base":"Prévia";
+            $pontos[$contador]["base"] = ($ponto->is_base == 1)?$ponto->base->name:"Staff";
+            $pontos[$contador]["tipo"] =$tipo;
             $pontuacao_total += ((int)$ponto->pontos+(int)$ponto->pontos_dicas);
             $contador ++;
         }
-        return ["pontos" => $pontos,"equipe" => $equipe->name,"has_base"=> $user->hasBase(),"role"=>$user->type,"total" =>$pontuacao_total,"minha_base"=>$user->base->name] ;
+        return ["pontos" => $pontos,"equipe" => $equipe->name,"has_base"=> $user->hasBase(),"role"=>$user->type,"total" =>($pontuacao_total < 0)?0:$pontuacao_total,"minha_base"=>$user->base->name] ;
+    }
+
+    public function actionGetById($id){
+        $this->justStaff();
+        $pontos = [];
+        /** @var Pontos $model */
+        $model = Pontos::find()->andWhere(["id" => $id])->one();
+        if(!$model){
+            throw new NotFoundHttpException("Pontuacao nao encontrada");
+        }
+        return ["pontos" => $model->pontos,"equipe" => $model->equipe->name,"minha_base"=>$model->base->name,"tempo" => $model->chegada] ;
+    }
+
+    public function actionEdit(){
+        /** @var Pontos $model */
+        $model = Pontos::find()->andWhere(["id" => $this->_post["id"]])->one();
+        $pontos = (int)$this->_post["pontos"];
+        $chegada = $this->_post["chegada"];
+        $model->pontos = $pontos;
+        $model->chegada = $chegada;
+        $model->save(false);
+        return true;
     }
 }

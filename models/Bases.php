@@ -45,7 +45,9 @@ class Bases extends ActiveRecord
                     $avaliadores = new Avaliadores();
                     $avaliadores->user_id = $user->id;
                     $avaliadores->base_id = $this->id;
-                    $avaliadores->save();
+                    if(!$avaliadores->save()){
+                        print_r($avaliadores->getErrors());exit;
+                    }
                 }
             }
         }

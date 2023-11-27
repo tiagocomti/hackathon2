@@ -60,6 +60,7 @@ class DataBaseController extends Controller
                 }
 
                 $equipe = new Equipe();
+                $equipe->id = trim((int)$id);
                 $equipe->name = trim($patrulha);
                 $equipe->users = [$user->getId()];
                 if($equipe->save()){
@@ -79,13 +80,34 @@ class DataBaseController extends Controller
         $handle = fopen($caminho, "r");
         if ($handle) {
             while (($line = fgets($handle)) !== false) {
-                if(Bases::findOne(["name"=>trim($line)])){
+                $base_explode = explode("|", $line);
+                $name_user = trim($base_explode[1]);
+                if(User::findOne(["name"=>trim($base_explode[1])])){
                     continue;
                 }
-                $base_explode = explode("|", $line);
+                $user = new User();
+                $user->name = $name_user;
+                $user->phone = "xxxx";
+                $user->observacoes = "Avaliador de base";
+                $user->type = User::TYPE_AVALIADOR;
+                $user->username = strtolower(Strings::removeEspecialCharacters($name_user));
+                $user->email = $user->username . "@" . "jogodacidade.app";
+                $user->password_hash = Password::hash($pass = Password::generate(4));
+                if ($user->save()) {
+                    echo "username: " . $user->username . " - ";
+                    echo "user:" . $user->getId();
+                    echo "senha:" . $pass;
+                    echo "\n";
+                }else{
+                    print_r($user->getErrors());
+                }
+                if(Bases::findOne(["name"=>trim($base_explode[0])])){
+                    continue;
+                }
                 $base = new Bases();
                 $base->name = trim($base_explode[0]);
                 $base->ramo = "senior";
+                $base->users = [$user->getId()];
                 if($base->save()){
                     echo "Base ".$base->name." salva com sucesso, ID: ".$base->id;
                     echo "\n";
@@ -341,5 +363,9 @@ class DataBaseController extends Controller
         }
 
 //        print_r($equipes);
+    }
+
+    public function actionDeletePonto($id){
+        Pontos::deleteAll(["id"=>$id]);
     }
 }
