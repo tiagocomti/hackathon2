@@ -53,11 +53,8 @@ class ErrorHandler extends \yii\web\ErrorHandler{
                     $user->logout();
                 }
             }
-            if(is_callable($exception->getName)) {
-                return $exception->getName();
-            }else{
-                return get_class($exception);
-            }
+
+            return get_class($exception);
 
         }
 

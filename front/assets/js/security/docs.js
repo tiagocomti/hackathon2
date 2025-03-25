@@ -14,7 +14,7 @@ function get_doc(){
 
     $.ajax({
         //IP de controle : 18.222.67.210 (passar sem waf para testes internos)
-        url : "https://apilocal.pontuacao.com.br:4443/site/docs#/",
+        url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/site/docs#/",
         type : 'POST',
         crossDomain: true,
 

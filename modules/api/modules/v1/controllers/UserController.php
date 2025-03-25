@@ -138,7 +138,7 @@ class UserController extends DefaultController
         if(!$user){
             throw new UnauthorizedHttpException("Login ou senha incorretos");
         }
-        return ["user"=>$user->getAttributes(null,["password_hash"]),"token" => $user->getMyToken(),"equipe_id" => $user->equipe->id];
+        return ["user"=>$user->getAttributes(null,["password_hash"]),"token" => $user->getMyToken(),"equipe_id" => $user?->equipe?->id];
     }
     /**
      * @SWG\Get(path="/api/v1/user/get-all",

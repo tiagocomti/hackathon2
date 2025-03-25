@@ -5,7 +5,7 @@ var token = atob(localtoken);
 var usuarios = [];
 
       $.ajax({
-            url : "https://apilocal.pontuacao.com.br:4443/api/v1/user/get-all?type=part",
+            url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/user/get-all?type=part",
             type : 'GET',
             crossDomain: true,
 

@@ -3,7 +3,7 @@ var localtoken = localStorage.getItem("token");
 var token = atob(localtoken);
 
       $.ajax({
-            url : "https://apilocal.pontuacao.com.br:4443/api/v1/bases/get-all",
+            url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/bases/get-all",
             type : 'GET',
             crossDomain: true,
 

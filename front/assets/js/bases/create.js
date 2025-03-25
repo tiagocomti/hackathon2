@@ -7,7 +7,7 @@ function createTarefa(){
     var name = document.getElementById("tarefa").value;
 
       $.ajax({
-            url : "https://apilocal.pontuacao.com.br:4443/api/v1/bases/create",
+            url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/bases/create",
             type : 'POST',
             crossDomain: true,
             

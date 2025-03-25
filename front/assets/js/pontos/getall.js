@@ -4,7 +4,7 @@ function getAllPontos(){
     var equipe_id = getUrlParameter("equipe_id");
 
     $.ajax({
-        url : "https://apilocal.pontuacao.com.br:4443/api/v1/pontos/get?equipe_id="+equipe_id,
+        url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/pontos/get?equipe_id="+equipe_id,
         type : 'GET',
         crossDomain: true,
 

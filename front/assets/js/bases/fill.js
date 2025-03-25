@@ -13,7 +13,7 @@ function fillUser(){
     var base_id = atob(tarefa);
 
       $.ajax({
-            url : "https://apilocal.pontuacao.com.br:4443/api/v1/bases/fill",
+            url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/bases/fill",
             type : 'POST',
             crossDomain: true,
             

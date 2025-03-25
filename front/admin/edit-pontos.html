@@ -131,7 +131,7 @@
             var id = $(object).val();
 
             $.ajax({
-                url : "https://apilocal.pontuacao.com.br:4443/api/v1/pontos/get-by-id?id="+id,
+                url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/pontos/get-by-id?id="+id,
                 type : 'GET',
                 crossDomain: true,
 
@@ -179,7 +179,7 @@
             $('.container-edit-pontos').slideUp();
 
             $.ajax({
-                url : "https://apilocal.pontuacao.com.br:4443/api/v1/pontos/edit",
+                url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/pontos/edit",
                 type : 'POST',
                 crossDomain: true,
 
