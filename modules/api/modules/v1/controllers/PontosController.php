@@ -86,8 +86,8 @@ class PontosController extends DefaultController
         $model->is_base = $is_base;
         $model->avaliador_id = $user->id;
         $model->chegada = $chegada;
-        $model->pontos = ($is_base == 2)?((int)$this->_post["pontos"]*-1):(int) $this->_post["pontos"];
-        $model->pontos_dicas = (int) $this->_post["pontos_dicas"];
+        $model->pontos = ($is_base == 2)?((int)$this->_post["pontos"]*1):(int) $this->_post["pontos"];
+        $model->pontos_dicas = (int) isset($this->_post["pontos_dicas"])?$this->_post["pontos_dicas"]:0;
         $model->observacao = $this->_post["observacao"];
         if($model->save()){
             return true;
@@ -182,7 +182,7 @@ class PontosController extends DefaultController
             $pontuacao_total += ((int)$ponto->pontos+(int)$ponto->pontos_dicas);
             $contador ++;
         }
-        return ["pontos" => $pontos,"equipe" => $equipe->name,"has_base"=> $user->hasBase(),"role"=>$user->type,"total" =>($pontuacao_total < 0)?0:$pontuacao_total,"minha_base"=>$user->base->name] ;
+        return ["pontos" => $pontos,"equipe" => $equipe->name,"has_base"=> $user->hasBase(),"role"=>$user->type,"total" =>($pontuacao_total < 0)?0:$pontuacao_total,"minha_base"=>$user?->base?->name] ;
     }
 
     public function actionGetById($id){
