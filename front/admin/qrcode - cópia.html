@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+
+    <!--CHARSET-->
+    <meta charset="UTF-8">
+
+    <!--VIEWPORT-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--NAME BAR-->
+    <title>Scan QR Code</title>
+
+    <!--ICON BAR-->
+    <link rel="shortcut icon" href="">
+
+    <!--IMPORT CSS-->
+    <link rel="stylesheet" type="text/css" href="../assets/css/styles.css">
+
+    <!--IMPORT ICONS-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!--BOOTSTRAP-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+</head>
+
+<body class="boddy-01">
+
+    <section id="loading" class="loading">
+        <img src="../assets/img/carregando.gif" alt="">
+    </section>
+
+    <header class="menu-desck">
+        <ul>
+            <li><a href="/admin/ranking.html">
+                <i class="uil uil-game-structure"></i> Ranking
+            </a></li>
+
+            <li><a href="/admin/qrcode.html">
+                <i class="uil uil-qrcode-scan"></i> QR Code
+            </a></li>
+
+            <li><a href="/admin/settings.html">
+                <i class="uil uil-setting"></i> Settings
+            </a></li>
+
+        </ul>
+    </header>
+
+    <section class="menu-mobile">
+        <ul>
+            <li  class="item-mobile"><a href="/admin/ranking.html">
+                <p class="icon-menu"><i class="uil uil-game-structure"></i></p>
+                <p class="txt-menu">Ranking</p>
+            </a></li>
+
+            <li class="item-mobile select-item"><a href="/admin/qrcode.html">
+                <p class="icon-menu"><i class="uil uil-qrcode-scan"></i></p>
+                <p class="txt-menu">QR Code</p>
+            </a></li>
+
+            <li class="item-mobile"><a href="/admin/settings.html">
+                <p class="icon-menu"><i class="uil uil-setting"></i></p>
+                <p class="txt-menu">Settings</p>
+            </a></li>
+
+        </ul>
+    </section>
+
+    <main class="ct-qrcode">
+        <!-- tela qr code -->
+        <div id="video-container">
+            <video id="qr-video"></video>
+        </div>
+
+        <!-- btn -->
+        <div class="btn-qrcode">
+            <form class="ct-input-qrcode">
+                <input class="input-qrcode" id="search" type="search" placeholder="ou Pesquise pelo Nome da Equipe">
+                <input onClick="searchEquipe()" type="button" id="submit" value="Enviar" class="btn-input-qrcode"></input>
+                </button>
+            </form>
+        </div>
+    </main>
+
+
+    <!--BOOTSTRAP-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+   <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
+    <!--IMPORT JS-->
+    <!-- <script src="../assets/js/loading.js"></script> -->
+    <script src="../assets/js/equipe/getall.js"></script>
+    <script type="module">
+        import QrScanner from "/assets/js/qrcode/qr-scanner.min.js";
+    
+        const video = document.getElementById('qr-video');
+        const videoContainer = document.getElementById('video-container');
+        const camHasCamera = document.getElementById('cam-has-camera');
+        const camList = document.getElementById('cam-list');
+        const camHasFlash = document.getElementById('cam-has-flash');
+        const flashToggle = document.getElementById('flash-toggle');
+        const flashState = document.getElementById('flash-state');
+        const camQrResult = document.getElementById('cam-qr-result');
+        const camQrResultTimestamp = document.getElementById('cam-qr-result-timestamp');
+        const fileSelector = document.getElementById('file-selector');
+        const fileQrResult = document.getElementById('file-qr-result');
+    
+        function setResult(label, result) {
+            console.log(result.data);
+            label.textContent = result.data;
+            camQrResultTimestamp.textContent = new Date().toString();
+            label.style.color = 'teal';
+            clearTimeout(label.highlightTimeout);
+            label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
+        }
+    
+        // ####### Web Cam Scanning #######
+    
+        const scanner = new QrScanner(video, result => setResult(camQrResult, result), {
+            onDecodeError: error => {
+                camQrResult.textContent = error;
+                camQrResult.style.color = 'inherit';
+            },
+            highlightScanRegion: true,
+            highlightCodeOutline: true,
+        });
+    
+        const updateFlashAvailability = () => {
+            scanner.hasFlash().then(hasFlash => {
+                camHasFlash.textContent = hasFlash;
+                flashToggle.style.display = hasFlash ? 'inline-block' : 'none';
+            });
+        };
+    
+        scanner.start().then(() => {
+            updateFlashAvailability();
+            // List cameras after the scanner started to avoid listCamera's stream and the scanner's stream being requested
+            // at the same time which can result in listCamera's unconstrained stream also being offered to the scanner.
+            // Note that we can also start the scanner after listCameras, we just have it this way around in the demo to
+            // start the scanner earlier.
+            QrScanner.listCameras(true).then(cameras => cameras.forEach(camera => {
+                const option = document.createElement('option');
+                option.value = camera.id;
+                option.text = camera.label;
+                camList.add(option);
+            }));
+        });
+    
+        QrScanner.hasCamera().then(hasCamera => camHasCamera.textContent = hasCamera);
+    
+        // for debugging
+        window.scanner = scanner;
+    
+        document.getElementById('scan-region-highlight-style-select').addEventListener('change', (e) => {
+            videoContainer.className = e.target.value;
+            scanner._updateOverlay(); // reposition the highlight because style 2 sets position: relative
+        });
+    
+        document.getElementById('show-scan-region').addEventListener('change', (e) => {
+            const input = e.target;
+            const label = input.parentNode;
+            label.parentNode.insertBefore(scanner.$canvas, label.nextSibling);
+            scanner.$canvas.style.display = input.checked ? 'block' : 'none';
+        });
+    
+        document.getElementById('inversion-mode-select').addEventListener('change', event => {
+            scanner.setInversionMode(event.target.value);
+        });
+    
+        camList.addEventListener('change', event => {
+            scanner.setCamera(event.target.value).then(updateFlashAvailability);
+        });
+    
+        flashToggle.addEventListener('click', () => {
+            scanner.toggleFlash().then(() => flashState.textContent = scanner.isFlashOn() ? 'on' : 'off');
+        });
+    
+        document.getElementById('start-button').addEventListener('click', () => {
+            scanner.start();
+        });
+    
+        document.getElementById('stop-button').addEventListener('click', () => {
+            scanner.stop();
+        });
+    
+        // ####### File Scanning #######
+    
+        fileSelector.addEventListener('change', event => {
+            const file = fileSelector.files[0];
+            if (!file) {
+                return;
+            }
+            QrScanner.scanImage(file, { returnDetailedScanResult: true })
+                .then(result => setResult(fileQrResult, result))
+                .catch(e => setResult(fileQrResult, { data: e || 'No QR code found.' }));
+        });
+    </script>
+
+</body>
+
+</html>

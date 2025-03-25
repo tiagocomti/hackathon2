@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/html">
+
+<head>
+
+    <!--CHARSET-->
+    <meta charset="UTF-8">
+
+    <!--VIEWPORT-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--NAME BAR-->
+    <title>Página da Equipe</title>
+
+    <!--ICON BAR-->
+    <link rel="shortcut icon" href="">
+
+    <!--IMPORT CSS-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
+
+    <!--IMPORT ICONS-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!--BOOTSTRAP-->
+    <link href="/boostrap/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
+
+</head>
+
+<body class="boddy-01">
+
+<div class="modal fade container-pontuar" id="modalPontuacao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Pontuar equipe: <strong><i class="equipe-name"></i></strong>
+                    <br>
+                    Base: <strong><i class="base-name"></i></strong>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="select_type" class="col-form-label">Tipo:</label><br/>
+                        <select name="select" id="select_type">
+                            <option value="1" selected>Pontos por base</option>
+                            <option value="2">Chefe oculto</option>
+                            <option value="3">Staff</option>
+                        </select>
+                    </div>
+                    <div class="mb-3" id="container_obs" style="display: none">
+                        <label for="obs" class="col-form-label">Observações:</label>
+                        <textarea class="form-control" id="obs"></textarea>
+                    </div>
+                    <div class="mb-3" id="container_chegada" style="display: none">
+                        <label for="chegada" class="col-form-label">Horario</label>
+                        <input name="saida" id="chegada" class="input-login" type="time" placeholder="Saída" required="" value="">
+                    </div>
+                    <div class="mb-3" style="width: 30%">
+                        <label for="pontos" class="col-form-label">Pontos</label>
+                        <input type="number" min="0" max="15" class="form-control" id="pontos">
+                    </div>
+<!--                    <div class="mb-3" style="width: 30%" id="container_dica">-->
+<!--                        <label for="dicas_points" class="col-form-label">Pontos dica</label>-->
+<!--                        <input type="number" min="0" max="15" class="form-control" id="dicas_points">-->
+<!--                    </div>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick="save()">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="loading" class="loading">
+    <img src="/assets/img/carregando.gif" alt="">
+</section>
+
+<div id="header_admin" style="display: none" >
+    <section class="menu-mobile">
+        <ul>
+            <li  class="item-mobile"><a href="/admin/qrcode.html">
+                <p class="icon-menu"><i class="uil uil-qrcode-scan"></i></p>
+                <p class="txt-menu">QR Code</p>
+            </a></li>
+
+            <li class="item-mobile"><a href="/admin/ger-equipes.html">
+                <p class="icon-menu"><i class="uil uil-users-alt"></i></p>
+                <p class="txt-menu">Equipes</p>
+            </a></li>
+
+            <li class="item-mobile"><a href="#" onclick="sair()">
+                <p class="icon-menu"><i class="uil uil-setting"></i></p>
+                <p class="txt-menu">Sair</p>
+            </a></li>
+
+        </ul>
+    </section>
+
+    <header class="menu-desck">
+        <ul>
+            <li><a href="/admin/qrcode.html">
+                <i class="uil uil-qrcode-scan"></i> QR Code
+            </a></li>
+
+            <li><a href="/admin/ger-equipes.html">
+                <i class="uil uil-users-alt"></i> Equipes
+            </a></li>
+
+            <li><a href="#" onclick="sair()">
+                <i class="uil uil-backpack"></i> Sair
+            </a></li>
+
+        </ul>
+    </header>
+</div>
+
+<div id="header_part" style="display: none" >
+    <section class="menu-mobile">
+        <ul>
+            <li class="item-mobile"><a href="/participante/qrcode.html">
+                <p class="icon-menu"><i class="uil uil-qrcode-scan"></i></p>
+                <p class="txt-menu">QR Code</p>
+            </a></li>
+
+            <li class="item-mobile select-item"><a href="/common/equipe/pontos.html?equipe_id=" class="href_pontos">
+                <p class="icon-menu"><i class="uil uil-ticket"></i></p>
+                <p class="txt-menu">Pontuação</p>
+            </a></li>
+
+            <li class="item-mobile " ><a href="/participante/equipe.html">
+                <p class="icon-menu"><i class="uil uil-users-alt"></i></p>
+                <p class="txt-menu">Equipe</p>
+            </a></li>
+            <li class="item-mobile" ><a href="#" onclick="sair()">
+                <p class="icon-menu"><i class="uil uil-backpack"></i></p>
+                <p class="txt-menu">Sair</p>
+            </a></li>
+
+        </ul>
+    </section>
+
+    <header class="menu-desck">
+        <ul>
+            <li><a href="/participante/qrcode.html">
+                <i class="uil uil-qrcode-scan"></i> QR Code
+            </a></li>
+
+            <li><a href="/participante/equipe.html">
+                <i class="uil uil-users-alt"></i> Equipe
+            </a></li>
+
+            <li><a href="/common/equipe/pontos.html?equipe_id=1" class="href_pontos">
+                <i class="uil uil-ticket"></i> Pontuação
+            </a></li>
+
+            <li><a href="#" onclick="sair()">
+                <i class="uil uil-backpack"></i> Sair
+            </a></li>
+        </ul>
+    </header>
+</div>
+
+<!-- nome -->
+<div  class="info-equipe">
+    <div class="">
+        <div>
+            <h3 id="name-equipe">Pontuação da equipe: <i class="equipe-name"></i> </h3>
+            <h5>Total: <strong><i class="equipe-total"></i></strong></h5>
+        </div>
+
+    </div>
+</div>
+<!-- integrantes -->
+<button style="width: 90%" type="button" class="btn btn-primary container-pontuar" data-bs-toggle="modal" data-bs-target="#modalPontuacao" data-bs-whatever="@getbootstrap">Pontuar</button>
+
+<div class="row table-responsive container-scroll-vertical" style="width: 90%;">
+    <table class="table table-striped table-hover">
+
+        <thead class="thead-light">
+        <tr>
+            <th scope="col" style="color: black">#</th>
+            <th scope="col" style="color: black">Nome da base</th>
+            <th scope="col" style="color: black">Chefe</th>
+            <th scope="col" style="color: black">Tipo de pontuação</th>
+            <th scope="col" style="color: black">chegada</th>
+            <th scope="col" style="color: black">Pontos</th>
+            <th scope="col" style="color: black">Pontos da dica</th>
+            <th scope="col" style="color: black">Observação</th>
+            <th scope="col" style="color: black">#ID (Controle)</th>
+        </tr>
+        </thead>
+        <tbody id="table_pontos">
+        <div class="spinner-border" role="status" id="spinner_loading">
+            <span class="sr-only">Loading...</span>
+        </div>
+        </tbody>
+    </table>
+</div>
+<!--IMPORT JS-->
+<!-- <script src="../assets/js/loading.js"></script> -->
+<script src="/assets/js/security/logout.js"></script>
+
+<!--BOOTSTRAP-->
+<script src="/boostrap/js/bootstrap.min.js"  crossorigin="anonymous"></script>
+<!--JQUERY-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
+<!--IMPORT JS-->
+<script src="/assets/js/pontos/getall.js"></script>
+<script src="/assets/js/common/utils.js"></script>
+<script src="/assets/js/pontos/pontuar.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.equipe-name').html(".....");
+        var currentdate = new Date()
+        $('#chegada').val(currentdate.getHours() + ":"+currentdate.getMinutes());
+        changeContainers($("#select_type").val());
+        getAllPontos();
+        $("#select_type").on("change",function(val,value){
+            changeContainers(this.value);
+        });
+        var type = localStorage.getItem("type");
+        if(type === "part"){
+            $(".container-pontuar").remove();
+        }
+        console.log(getUrlParameter("open_modal"));
+        if(getUrlParameter("open_modal") === "yes"){
+            $('#modalPontuacao').modal('show');
+        }
+    })
+
+    function save(){
+        var tipo = $("#select_type").val();
+        var chegada = $("#chegada").val();
+        var pontos = $("#pontos").val();
+        var dica_points = $("#dicas_points").val();
+        var pontos = $("#pontos").val();
+        var obs = $("#obs").val();
+        if(tipo == null || tipo == undefined || tipo == ""){
+            alert("Voce precisa preencher o campo Tipo");
+            $("select_type").focus();
+            return false;
+        }
+
+        var dados = {
+            "equipe_id": getUrlParameter("equipe_id"),
+            "observacao": obs,
+            "pontos": pontos,
+            "pontos_dicas":dica_points,
+            "new":true,
+            "is_base": tipo,
+            "chegada": chegada
+        };
+        pontuar(dados);
+    }
+
+    function changeContainers(valor){
+        if(valor === "previa"){
+            $("#container_obs").slideDown();
+            $("#container_chegada").slideUp();
+            $("#container_dica").slideUp();
+        }else{
+            $("#container_obs").slideUp();
+            $("#container_chegada").slideDown();
+            $("#container_dica").slideDown();
+        }
+    }
+</script>
+
+</body>
+
+</html>

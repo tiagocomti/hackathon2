@@ -1,0 +1,57 @@
+FROM --platform=linux/arm64/v8 php:8.3-fpm
+RUN apt-get update -y && apt-get install -y libpng-dev libicu-dev libzip-dev
+
+RUN pecl install timezonedb
+RUN docker-php-ext-enable timezonedb
+
+RUN pecl install redis
+RUN docker-php-ext-enable redis.so
+
+RUN docker-php-ext-install gd
+RUN docker-php-ext-install gettext
+RUN docker-php-ext-install intl
+RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install opcache
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install sockets
+RUN docker-php-ext-install zip
+RUN docker-php-ext-install -j$(nproc) bcmath
+
+COPY ./docker.api.dev/php/php.ini /usr/local/etc/php/
+COPY ./docker.api.dev/php/php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
+COPY ./docker.api.dev/php/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
+
+RUN #mkdir -p /sock
+RUN #touch /var/run/php8-fpm.sock
+RUN #chmod -R 777 /var/run/php8-fpm.sock
+
+
+RUN useradd www
+RUN mkdir -p /var/www/html/ && chown www:www /var/www/html
+COPY . /var/www/html
+
+RUN cd /var/www/html/
+WORKDIR /var/www/html
+RUN curl -sS https://getcomposer.org/installer -o composer-setup.php
+RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN set -eux
+RUN rm -f /var/www/html/vendor || true
+RUN rm -f /var/www/html/composer.lock
+
+RUN /usr/local/bin/composer update --quiet || true
+RUN /usr/local/bin/composer install -n
+RUN chmod -R 777 /var/www/html/runtime
+RUN chmod -R 777 /var/www/html/web/assets
+RUN chmod +x ./docker.api.dev/php/wait-for-db.sh
+
+RUN mkdir runtime  || true
+RUN mkdir runtime/logs  || true
+RUN touch runtime/logs/api.log || true
+
+RUN chown -R www:www runtime/logs
+RUN chmod o+rw -R runtime/logs
+
+RUN chmod -R 777 /var/www/html/web/assets
+
+EXPOSE 9000

@@ -1,9 +1,116 @@
-version: '2'
+version: '3'
 services:
-  php:
-    image: yiisoftware/yii2-php:7.4-apache
+  pontosnginx:
+    build:
+      context: ./docker.api.dev/
+      dockerfile: nginx/Dockerfile
+    container_name: pontosnginx
     volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./:/app:delegated
+      - ./commands:/var/www/html/commands
+      - ./bin:/var/www/html/bin
+      - ./config:/var/www/html/config
+      - ./helpers:/var/www/html/helpers
+      - ./models:/var/www/html/models
+      - ./db:/var/www/html/db
+      - ./web:/var/www/html/web
+      - ./enums:/var/www/html/enums
+      - ./modules:/var/www/html/modules
+      - ./migrations:/var/www/html/migrations
+      - ./docker.api.dev/nginx/swagger.digest:/etc/nginx/swagger.digest
+      - ./docker.api.dev/nginx/webhook.digest:/etc/nginx/webhook.digest
+      - ./docker.api.dev/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker.api.dev/nginx/ssl:/etc/nginx/ssl
+      - ./http:/var/www/html/http
+      - ./front:/var/www/html/front
+      - phpsocket:/var/www/html/sock
+
+
+    restart: always
     ports:
-      - '8000:80'
+      - "4443:443"
+      - "880:80"
+    links:
+      - pontosphp
+    networks:
+      - pontuacao-net
+
+  pontosphp:
+    build:
+      context: .
+      dockerfile: Dockerfile-phpfpm-dev
+    restart: always
+    container_name: pontosphp
+    depends_on:
+      - pontosdb
+    volumes:
+      - ./commands:/var/www/html/commands
+      - ./bin:/var/www/html/bin
+      - ./config:/var/www/html/config
+      - ./migrations:/var/www/html/migrations
+      - ./controllers:/var/www/html/controllers
+      - ./helpers:/var/www/html/helpers
+      - ./models:/var/www/html/models
+      - ./modules:/var/www/html/modules
+      - ./docker.api.dev:/var/www/html/docker.api.dev
+      - ./views:/var/www/html/views
+      - ./web:/var/www/html/web
+      - ./b3:/var/www/html/b3
+      - ./logs:/var/www/html/logs
+      - ./enums:/var/www/html/enums
+      - ./http:/var/www/html/http
+      - ./special:/var/www/html/special
+      - ./db:/var/www/html/db
+      - ./pontosdb:/var/www/html/pontosdb
+      - ./requests:/var/www/html/requests
+      - ./error:/var/www/html/error
+      - ./exception:/var/www/html/exception
+      - ./aws:/var/www/html/aws
+      - ./mail:/var/www/html/mail
+      - ./composer.json:/var/www/html/composer.json
+      - phpsocket:/var/www/html/sock
+      - ./front:/var/www/html/front
+
+
+    networks:
+      - pontuacao-net
+
+  pontosdb:
+    image: mysql:5.7
+    platform: linux/amd64
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'pontuacao'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'user'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'pontuacao'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: '1234567a'
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3307:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+      # Where our data will be persisted
+    volumes:
+      - ./runtime/pontosdb/:/var/lib/mysql
+    networks:
+      - pontuacao-net
+    container_name: pontosdb
+  pontocache:
+    image: redis:latest
+    ports:
+      - "6378:6379"
+    volumes:
+      - redis_data:/data:rw
+    command: redis-server --save 20 1 --loglevel warning
+    networks:
+      - pontuacao-net
+volumes:
+  phpsocket:
+  redis_data: # Nome do volume
+  # Configurações do volume, se aplicável
+networks:
+  pontuacao-net:
+    driver: bridge

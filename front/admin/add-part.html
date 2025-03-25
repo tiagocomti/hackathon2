@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+
+    <!--CHARSET-->
+    <meta charset="UTF-8">
+
+    <!--VIEWPORT-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--NAME BAR-->
+    <title>Editar Equipe</title>
+
+    <!--ICON BAR-->
+    <link rel="shortcut icon" href="">
+
+    <!--IMPORT CSS-->
+    <link rel="stylesheet" type="text/css" href="../assets/css/styles.css">
+
+    <!--IMPORT ICONS-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!--BOOTSTRAP-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+</head>
+
+<body class="boddy-02">
+
+    <section id="loading" class="loading">
+        <img src="../assets/img/carregando.gif" alt="">
+    </section>
+
+    <header class="menu-desck">
+        <ul>
+            <li><a href="/admin/ranking.html">
+                <i class="uil uil-game-structure"></i> Ranking
+            </a></li>
+
+            <li><a href="/admin/qrcode.html">
+                <i class="uil uil-qrcode-scan"></i> QR Code
+            </a></li>
+
+            <li><a href="/admin/settings.html">
+                <i class="uil uil-setting"></i> Settings
+            </a></li>
+
+        </ul>
+    </header>
+
+    <section class="menu-mobile">
+        <ul>
+            <li  class="item-mobile"><a href="/admin/ranking.html">
+                <p class="icon-menu"><i class="uil uil-game-structure"></i></p>
+                <p class="txt-menu">Ranking</p>
+            </a></li>
+
+            <li class="item-mobile"><a href="/admin/qrcode.html">
+                <p class="icon-menu"><i class="uil uil-qrcode-scan"></i></p>
+                <p class="txt-menu">QR Code</p>
+            </a></li>
+
+            <li class="item-mobile"><a href="/admin/settings.html">
+                <p class="icon-menu"><i class="uil uil-setting"></i></p>
+                <p class="txt-menu">Settings</p>
+            </a></li>
+
+        </ul>
+    </section>
+
+    <main class="main-equipe">
+        <div class="esp-edit-equipe">
+            <div class="tl-pg-login">
+                <h1>Adicionar Participantes</h1>
+                <h3 id="name-equipe">Equipe</h3>
+            </div>
+    
+            <form>
+                <div class="w-100" id="alertas"></div>
+                <div class="ct-input-login d-block my-2 d-flex">
+                    <input class="w-100" placeholder="Pesquise por um nome" id="search" type="search">
+                    <input type="button" onclick="searchUsers()" value="Search" id="send" class="btn-input-qrcode"></input>
+                </div>
+
+                <div class="ct-input-login d-block my-2">
+                    <ul class="list-user" id="list-user"></ul>
+                </div>
+
+                <div>
+                    <input type="button" onclick="fillUser()" value="Adicionar" id="submit" class="btn-03"></input>
+                    <div class="ct-btn-cancel">
+                        <a class="btn-cancel" href="equipe.html">Cancelar</a>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+ 
+    </main>
+
+
+    <!--BOOTSTRAP-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+   <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
+    <!--IMPORT JS-->
+    <!-- <script src="../assets/js/loading.js"></script> -->
+    <script src="../assets/js/equipe/get.js"></script>
+    <script src="../assets/js/equipe/fill.js"></script>
+    <script src="../assets/js/user/getall.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+
+    <!--CHARSET-->
+    <meta charset="UTF-8">
+
+    <!--VIEWPORT-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--NAME BAR-->
+    <title>Settings</title>
+
+    <!--ICON BAR-->
+    <link rel="shortcut icon" href="">
+
+    <!--IMPORT CSS-->
+    <link rel="stylesheet" type="text/css" href="../assets/css/styles.css">
+
+    <!--IMPORT ICONS-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!--BOOTSTRAP-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+</head>
+
+<body class="boddy-02">
+
+<div id="header_part" style="display: none" >
+    <section class="menu-mobile">
+        <ul>
+            <li class="item-mobile"><a href="/participante/qrcode.html">
+                <p class="icon-menu"><i class="uil uil-qrcode-scan"></i></p>
+                <p class="txt-menu">QR Code</p>
+            </a></li>
+
+            <li class="item-mobile select-item"><a href="/common/equipe/pontos.html?equipe_id=" class="href_pontos">
+                <p class="icon-menu"><i class="uil uil-ticket"></i></p>
+                <p class="txt-menu">Pontuação</p>
+            </a></li>
+
+            <li class="item-mobile " ><a href="/participante/equipe.html">
+                <p class="icon-menu"><i class="uil uil-users-alt"></i></p>
+                <p class="txt-menu">Equipe</p>
+            </a></li>
+            <li class="item-mobile" ><a href="#" onclick="sair()">
+                <p class="icon-menu"><i class="uil uil-backpack"></i></p>
+                <p class="txt-menu">Sair</p>
+            </a></li>
+
+        </ul>
+    </section>
+
+    <header class="menu-desck">
+        <ul>
+            <li><a href="/participante/qrcode.html">
+                <i class="uil uil-qrcode-scan"></i> QR Code
+            </a></li>
+
+            <li><a href="/participante/equipe.html">
+                <i class="uil uil-users-alt"></i> Equipe
+            </a></li>
+
+            <li><a href="/common/equipe/pontos.html?equipe_id=1" class="href_pontos">
+                <i class="uil uil-ticket"></i> Pontuação
+            </a></li>
+
+            <li><a href="#" onclick="sair()">
+                <i class="uil uil-backpack"></i> Sair
+            </a></li>
+        </ul>
+    </header>
+</div>
+
+    <main class="main-equipe" style="display: contents">
+        <form name="form1" method="post" style="width: 50%">
+            <div class="w-200" id="alertas"></div>
+            <div class="ct-input-login">
+                <label><i class="uil uil-user"></i></label>
+                <input name="id" id="id" class="input-login" type="text" placeholder="ID da pontuação" required="">
+            </div>
+            <div class="container-edit-pontos" style="display: none">
+                <div class="ct-input-login">
+                    <label><i class="uil uil-user"></i></label>
+                    <input name="equipe_name" id="equipe_name" class="input-login" type="text" disabled placeholder="Equipe" required="" style="background-color: gray">
+                </div>
+                <div class="ct-input-login">
+                    <label><i class="uil uil-user"></i></label>
+                    <input name="pontos" id="pontos" class="input-login" type="number" placeholder="Pontuacão" required="">
+                </div>
+                <div class="ct-input-login">
+                    <label><i class="uil uil-user"></i></label>
+                    <input name="chegada" id="chegada" class="input-login" type="text" placeholder="tempo" required="">
+                </div>
+                <button onClick="editar()" type="button" id="submit" class="btn-03">
+                    ajustar
+                </button>
+            </div>
+
+        </form>
+ 
+    </main>
+
+
+    <!--BOOTSTRAP-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+   <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#id').keypress(function (event) {
+                // Verifica se a tecla pressionada é a tecla Enter (código 13)
+                if (event.which === 13) {
+                    // Coloque aqui a função que você quer executar quando Enter for pressionado
+                    getPoints(this);
+                } else if (event.which === 9) {
+                    // Coloque aqui a função que você quer executar quando Tab for pressionado
+                    getPoints(this);
+                }
+            });
+        });
+
+        function getPoints(object){
+
+            var token = atob(localStorage.getItem("token"));
+            $('.container-edit-pontos').slideUp();
+            var id = $(object).val();
+
+            $.ajax({
+                url : "https://apilocal.pontuacao.com.br:4443/api/v1/pontos/get-by-id?id="+id,
+                type : 'GET',
+                crossDomain: true,
+
+                dataType: "json",
+
+                headers: {
+                    "token": token,
+                },
+                success: function (retorno) {
+                    $("#equipe_name").val(retorno.equipe);
+                    $("#pontos").val(retorno.pontos);
+                    $("#chegada").val(retorno.tempo);
+                    $('.container-edit-pontos').slideDown();
+
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr);
+                    if(xhr.status === 401){
+                        alert("Hei Xoven, você não tem permissão pra acessar essa página em, ta logado?");
+                        window.location.href = "/login.html";
+                        return false;
+                    }
+                    if(xhr.status === 403){
+                        alert("Tentando acessar pontos de outra equipe ne? aqui não raqui!!!!");  window.history.back();
+                        return false;
+                    }
+                    alert("Pontuação nao encontrada");
+                }
+            })
+        }
+
+        function editar(){
+
+            var pontos = $('#pontos').val();
+            var id = $('#id').val();
+            var chegada = $('#chegada').val();
+
+            var dados = {
+                "id" : id,
+                "pontos": pontos,
+                "chegada": chegada
+            };
+            var token = atob(localStorage.getItem("token"));
+            $('.container-edit-pontos').slideUp();
+
+            $.ajax({
+                url : "https://apilocal.pontuacao.com.br:4443/api/v1/pontos/edit",
+                type : 'POST',
+                crossDomain: true,
+
+                dataType: "json",
+                data: JSON.stringify(dados),
+
+                headers: {
+                    "token": token,
+                },
+                success: function (retorno) {
+                    alert("Pontuado com sucesso");
+                    $('.container-edit-pontos').slideDown();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr);
+                    if(xhr.status === 401){
+                        alert("Hei Xoven, você não tem permissão pra acessar essa página em, ta logado?");
+                        window.location.href = "/login.html";
+                        return false;
+                    }
+                    if(xhr.status === 403){
+                        alert("Tentando acessar pontos de outra equipe ne? aqui não raqui!!!!");  window.history.back();
+                        return false;
+                    }
+                    alert("Pontuação nao encontrada");
+                }
+            })
+        }
+
+
+
+
+    </script>
+
+</body>
+
+</html>

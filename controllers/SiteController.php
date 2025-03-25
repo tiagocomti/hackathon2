@@ -2,14 +2,15 @@
 
 namespace app\controllers;
 
-use app\models\Equipe;
+use app\helpers\SendMail;
+use TheNetworg\OAuth2\Client\Provider\Azure;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-
+use app\controllers\MySwaggerUIRenderer;
 class SiteController extends Controller
 {
     /**
@@ -37,24 +38,13 @@ class SiteController extends Controller
             ],
         ];
     }
-
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
-
     public function actions(): array
     {
-        \Yii::setAlias("@app/v1/controllers", "/usr/local/www/hackathon/modules/api/modules/v1/controllers" );
+        \Yii::setAlias("@app/v1/controllers", __DIR__."/../modules/api/modules/v1/controllers" );
         \Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
         return [
             'docs' => [
-                'class' => 'yii2mod\swagger\SwaggerUIRenderer',
+                'class' => 'app\controllers\MySwaggerUIRenderer',
                 'restUrl' => Url::to(['site/json-schema']),
             ],
             'json-schema' => [
@@ -70,19 +60,5 @@ class SiteController extends Controller
                 'class' => 'yii\web\ErrorAction',
             ],
         ];
-    }
-
-    public function actionGetAllQrcodes($reserva = false){
-        $this->layout = false;
-        $array_equipes = [];
-//        $condition = ['like', 'name', "%"."reserva" . '%', false];
-//        $condition = ['like', 'name', "%"."reserva" . '%', false];
-        $equipes = Equipe::find()->all();
-        /** @var Equipe $equipe */
-        foreach ($equipes as $equipe) {
-            $equipe->ramo='senior';
-            $array_equipes[] = ["id" => $equipe->id,"name" => $equipe->name, "ramo" => ucfirst($equipe->ramo),"base_64" => $equipe->getQrcode()];
-        }
-        return $this->render('get-all-qrcodes',["equipes" => $array_equipes]);
     }
 }
