@@ -45,7 +45,7 @@
                     <div class="mb-3">
                         <label for="select_type" class="col-form-label">Tipo:</label><br/>
                         <select name="select" id="select_type">
-                            <option value="1" selected>Pontos por base</option>
+                            <option value="1">Pontos por base</option>
                             <option value="2">Chefe oculto</option>
                             <option value="3">Staff</option>
                         </select>
@@ -219,6 +219,7 @@
         $('.equipe-name').html(".....");
         var currentdate = new Date()
         $('#chegada').val(currentdate.getHours() + ":"+currentdate.getMinutes());
+        $("#select_type").val(1);
         changeContainers($("#select_type").val());
         getAllPontos();
         $("#select_type").on("change",function(val,value){

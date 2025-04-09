@@ -32,15 +32,17 @@ class DataBaseController extends Controller
         BaseConsole::output("end at: ". Date::getTimeWithMicroseconds());
     }
 
-    public function actionImportEquipes($path){
+    public function actionImportEquipes($path, $ramo){
         $handle = fopen($path, "r");
         if ($handle) {
             while (($line = fgets($handle)) !== false) {
                 $linha = explode("-", trim($line));
-                list($id, $patrulha, $monitor) = $linha;
-                if(Equipe::findOne(["name"=>trim($patrulha)])){
+                list($id, $grupo, $equipe_name) = $linha;
+                $equipe_name = $grupo.$equipe_name;
+                if(Equipe::findOne(["name"=>trim($equipe_name)])){
                     continue;
                 }
+                $monitor = Strings::removeEspecialCharacters($equipe_name);
                 $user = new User();
                 $user->name = $monitor;
                 $user->phone = "xxxx";
@@ -51,7 +53,7 @@ class DataBaseController extends Controller
                 $user->password_hash = Password::hash("jogodacidade@1234567a");
                 if ($user->save()) {
                     echo "username: " . $user->username . " - ";
-                    echo "base:" . $patrulha;
+                    echo "equipe:" . $equipe_name;
                     echo "user:" . $user->getId();
                     echo "\n";
                 }else{
@@ -60,7 +62,8 @@ class DataBaseController extends Controller
 
                 $equipe = new Equipe();
                 $equipe->id = trim((int)$id);
-                $equipe->name = trim($patrulha);
+                $equipe->name = trim($equipe_name);
+                $equipe->ramo = trim($ramo);
                 $equipe->users = [$user->getId()];
                 if($equipe->save()){
                     echo "Equipe ".$equipe->name." salva com sucesso, ID: ".$equipe->id;
@@ -77,11 +80,20 @@ class DataBaseController extends Controller
 
     public function actionImportBases($caminho){
         $handle = fopen($caminho, "r");
+        $ramo_atual = "lobinho";
         if ($handle) {
+            $contador = 1;
             while (($line = fgets($handle)) !== false) {
                 $base_explode = explode("|", $line);
-                $name_user = trim($base_explode[1]);
-                if(User::findOne(["name"=>trim($base_explode[1])])){
+                list($id, $base_name, $ramo) = $base_explode;
+                $ramo = strtolower(trim($ramo));
+                if($ramo != $ramo_atual){
+                    $ramo_atual = $ramo;
+                    $contador = 1;
+                }
+                $base_name = trim($base_name);
+                $name_user = "base_".trim($contador)."_".trim($ramo_atual);
+                if(User::findOne(["name"=>trim($name_user)])){
                     continue;
                 }
                 $user = new User();
@@ -100,12 +112,13 @@ class DataBaseController extends Controller
                 }else{
                     print_r($user->getErrors());
                 }
-                if(Bases::findOne(["name"=>trim($base_explode[0])])){
+                if(Bases::findOne(["name"=>trim($base_name)])){
                     continue;
                 }
                 $base = new Bases();
-                $base->name = trim($base_explode[0]);
-                $base->ramo = "senior";
+                $base->id = $id;
+                $base->name = trim($base_name);
+                $base->ramo = strtoupper(trim($ramo_atual));
                 $base->users = [$user->getId()];
                 if($base->save()){
                     echo "Base ".$base->name." salva com sucesso, ID: ".$base->id;
@@ -114,6 +127,7 @@ class DataBaseController extends Controller
                     echo "deu ruim, segue erro";
                     print_r($base->getErrors());
                 }
+                $contador++;
             }
         }
         echo "finalizado";
@@ -131,6 +145,8 @@ class DataBaseController extends Controller
                 }
                 $explode = explode("|", $line);
                 if (count($explode) > 1) {
+                    $id = array_shift($explode);
+                    $explode = array_values($explode);
                     if ($ramo == Equipe::RAMO_LOBO) {
                         $equipe_nome = "(GE: " . trim($explode[0]) . "° - " . trim($explode[1]) . ") ";
                         $nome = trim($explode[2]);
@@ -141,6 +157,7 @@ class DataBaseController extends Controller
                         $participante = trim($explode[2]);
                     }
                     $equipe = new Equipe();
+                    $equipe->id = $id;
                     $equipe->ramo = $ramo;
                     $equipe->name = $equipe_nome.$nome;
 

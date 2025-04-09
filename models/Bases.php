@@ -34,7 +34,7 @@ class Bases extends ActiveRecord
      * @throws \yii\db\StaleObjectException
      */
     public function afterSave($insert, $changedAttributes){
-        if(!$insert){
+        if($insert){
             foreach($this->users as $user_id){
                 $user = User::findOne(["id" => $user_id]);
                 if($user && $user->type == User::TYPE_AVALIADOR ||

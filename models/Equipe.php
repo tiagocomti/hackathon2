@@ -99,7 +99,7 @@ class Equipe extends ActiveRecord
 
     public function getQrcode(){
         if(!\Yii::$app->cache->get("qrcode_".$this->id)) {
-            $qrCode = (new QrCode('https://jogodacidade.app/common/equipe/pontos.html?equipe_id='.$this->id.'&open_modal=yes'))
+            $qrCode = (new QrCode('https://grandejogo.org/common/equipe/pontos.html?equipe_id='.$this->id.'&open_modal=yes'))
                 ->setSize(250)
                 ->setMargin(5)
                 ->setForegroundColor(16, 133, 193);

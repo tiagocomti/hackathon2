@@ -1,20 +1,94 @@
-546-Carijós-Fernanda Mel 149
-547-Guajajaras-Luanna Dolores 7
-548-Caparaó-Davi Sthel 23
-549-Caiçara-Esther Carolini 21
-550-Maracajú-Yslan Cirilo 107
-551-Tupis-Raiana Araujo 7
-552-Xavantes-Mariana Alves 186
-553-Araguari-Livia Rosa 21
-554-Araci-Olivia Barkblom 101
-555-Timbiras-Davi Laymen 139
-556-Caetés-Victor Gabriel 106
-557-Oiapoque-Daniel Henrique 139
-558-Tupinambás-Sarah Cristhie 68
-559-Aimorés-Isadora Cristhie 68
-560-Guaranis-Izabela Barreto 139
-561-Guaicurus-Vinicius Soares 46
-562-Goitacases-Lucas Oliveira 107
-563-Carandaí-Francisco Andrade 46
-564-Tamoios-João Vitor 13
-565-Tabaiares-Pedro Augusto 149
+1-Branca|(Seeonee)-7
+2-Amarela|(Seeonee)-7
+3-Branca|(Abangani)-7
+4-Preta|(Abangani)-7
+5-Branca-13
+6-Amarela-13
+7-Preta|(Flor de Lis)-21
+8-Cinza|(Flor de Lis)-21
+9-Branca|(Flor de Lis)-21
+10-Vermelha|(Flor de Lis)-21
+11-Preta|(Lobo Gris)-21
+12-Branca|(Lobo Gris)-21
+13-Cinza|(Lobo Gris)-21
+14-Cinza|(Túnel do Morcego)-23
+15-Branca|(Túnel do Morcego)-23
+16-Marrom|(Túnel do Morcego)-23
+17-Preta|(Sabiá)-23
+18-Amarela|(Sabiá)-23
+19-Vermelha|(Sabiá)-23
+20-Marrom|(Sabiá)-23
+21-Amarela-34
+22-Branca-39
+23-Vermelha-39
+24-Amarela-39
+25-Cinza-46
+26-Vermelha-46
+27-Amarela-46
+28-Vermelha-52
+29-Branca-52
+30-Cinza-52
+31-Branca-68
+32-Amarela-77
+33-Amarela-77
+34-Amarela-83
+35-Vermelha-83
+36-Preta-83
+37-Marrom-97
+38-Marrom-97
+39-Amarela-98
+40-Branca-98
+41-Cinza-101
+42-Marrom-101
+43-Preta-106
+44-Vermelha-106
+45-Cinza-106
+46-Vermelha-106
+47-Cinza-106
+48-Preta-106
+49-Branca|(Lobo Guará)-107
+50-Preta|(Lobo Guará)-107
+51-Cinza|(Lobo Guará)-107
+52-Vermelha|(Lobo Guará)-107
+53-Vermelha|(Cruzeiro do Sul)-107
+54-Marrom|(Cruzeiro do Sul)-107
+55-Branca|(Cruzeiro do Sul)-107
+56-Amarela|(Cruzeiro do Sul)-107
+57-Branca|(Pantera Negra)-107
+58-Preta|(Pantera Negra)-107
+59-Marrom|(Pantera Negra)-107
+60-Amarela|(Pantera Negra)-107
+61-Branca-109
+62-Cinza-109
+63-Preta-109
+64-Vermelha-109
+65-Preta|(Lobo Diamante)-113
+66-Amarela|(Cruzeiro do Sul)-113
+67-Branca|(Lobo Diamante)-113
+68-Cinza|(Lobo Diamante)-113
+69-Cinza|(Cruzeiro do Sul)-113
+70-Cinza-116
+71-Preta-117
+72-Cinza-117
+73-Branca|(Lobinhos em Ação)-118
+74-Cinza|(Lobinhos em Ação)-118
+75-Vermelha|(Lobinhos em Ação)-118
+76-Cinza|(Cruzeiro do Sul)-118
+77-Marrom|(Cruzeiro do Sul)-118
+78-Vermelha|(Cruzeiro do Sul)-118
+79-Amarela|(Cruzeiro do|Sul)-118
+80-Amarela-139
+81-Vermelha-139
+82-Amarela-188
+83-Preta-188
+84-Amarela-197
+85-Branca-197
+86-Cinza-197
+87-Cinza-197
+88-Amarela-197
+89-Castanha-205
+90-Branca-205
+91-Vermelha-214
+92-Preta-214
+93-Preta-116+135
+94-Branca-197+177

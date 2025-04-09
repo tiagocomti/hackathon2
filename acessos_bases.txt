@@ -1,0 +1,118 @@
+username: base_1_lobinho - user:561senha:5XAj
+Base A Trégua das Águas salva com sucesso, ID: 1
+username: base_2_lobinho - user:562senha:a4BC
+Base Cantando com Akelá salva com sucesso, ID: 2
+username: base_3_lobinho - user:563senha:zMj9
+Base Contos em Imagens salva com sucesso, ID: 3
+username: base_4_lobinho - user:564senha:tD9e
+Base Kim na Jângal salva com sucesso, ID: 4
+username: base_5_lobinho - user:565senha:cEw7
+Base História do Escotismo salva com sucesso, ID: 5
+username: base_6_lobinho - user:566senha:8Hzu
+Base Alvo Certo, Resgate Rápido! salva com sucesso, ID: 6
+username: base_7_lobinho - user:567senha:N3d7
+Base Jogo da Memória com Raksha salva com sucesso, ID: 7
+username: base_8_lobinho - user:568senha:F7eC
+Base Sábios como Baloo, seguindo a Trilha da Sabedoria salva com sucesso, ID: 8
+username: base_9_lobinho - user:569senha:Pt4B
+Base Os Nós de Kotick salva com sucesso, ID: 9
+username: base_10_lobinho - user:570senha:ngT9
+Base Código KYS salva com sucesso, ID: 10
+username: base_11_lobinho - user:571senha:3xXr
+Base Escoteiro em Movimento (Uniforme Certo) salva com sucesso, ID: 11
+username: base_12_lobinho - user:572senha:r3pP
+Base Em Movimento pelo Futuro do Planeta salva com sucesso, ID: 12
+username: base_13_lobinho - user:573senha:Tsc4
+Base Escotismo em Movimento - Território dos Filhotes salva com sucesso, ID: 13
+username: base_14_lobinho - user:574senha:mSc5
+Base Vencendo Obstáculos com Kotick salva com sucesso, ID: 14
+username: base_15_lobinho - user:575senha:f4Q2
+Base Conhecendo o Avião salva com sucesso, ID: 15
+username: base_1_escoteiro - user:576senha:xB3S
+Base Caça às Canções salva com sucesso, ID: 16
+username: base_2_escoteiro - user:577senha:2N9p
+Base Caça-Palavras do Escotismo salva com sucesso, ID: 17
+username: base_3_escoteiro - user:578senha:8E8b
+Base Revezamento salva com sucesso, ID: 18
+username: base_4_escoteiro - user:579senha:ve6P
+Base Construindo o Futuro salva com sucesso, ID: 19
+username: base_5_escoteiro - user:580senha:c7Gr
+Base Kim Olfativo salva com sucesso, ID: 20
+username: base_6_escoteiro - user:581senha:Xw32
+Base Comida Mateira salva com sucesso, ID: 21
+username: base_7_escoteiro - user:582senha:mfB7
+Base Alfabéto Fonético salva com sucesso, ID: 22
+username: base_8_escoteiro - user:583senha:hDe9
+Base Circuito dos Nós salva com sucesso, ID: 23
+username: base_9_escoteiro - user:584senha:97Pr
+Base Caminhando sobre as Águas salva com sucesso, ID: 24
+username: base_10_escoteiro - user:585senha:ZM2g
+Base Caixa de Sinais salva com sucesso, ID: 25
+username: base_11_escoteiro - user:586senha:Dty2
+Base Escotismo em Movimento salva com sucesso, ID: 26
+username: base_12_escoteiro - user:587senha:RAw6
+Base Espiritualidade salva com sucesso, ID: 27
+username: base_13_escoteiro - user:588senha:J3Sg
+Base Comunicação Através de Bandeiras salva com sucesso, ID: 28
+username: base_14_escoteiro - user:589senha:K6d3
+Base Azimute e Contra Azimute salva com sucesso, ID: 29
+username: base_15_escoteiro - user:590senha:r58U
+Base Uniforme e Distintivos salva com sucesso, ID: 30
+username: base_16_escoteiro - user:591senha:U6cD
+Base Cultura Escoteira salva com sucesso, ID: 31
+username: base_17_escoteiro - user:592senha:Y9hk
+Base Dois na Linha e Um no Gol salva com sucesso, ID: 32
+username: base_18_escoteiro - user:593senha:6kuW
+username: base_1_senior - user:594senha:Hr9n
+Base Shark salva com sucesso, ID: 34
+username: base_2_senior - user:595senha:e4AA
+Base Rebocador :: Navio salva com sucesso, ID: 35
+username: base_3_senior - user:596senha:wF4Y
+Base Missão Paz e Justiça salva com sucesso, ID: 36
+username: base_4_senior - user:597senha:6rGQ
+Base Desafio dos Vales Sagrados salva com sucesso, ID: 37
+username: base_5_senior - user:598senha:3fDc
+Base Pajés e Canibais salva com sucesso, ID: 38
+username: base_6_senior - user:599senha:6hFf
+Base Nhandé Inã :: O Desafio dos Nós salva com sucesso, ID: 39
+username: base_7_senior - user:600senha:RyM5
+Base Yvate Ha Tenondé salva com sucesso, ID: 40
+username: base_8_senior - user:601senha:K3Wf
+Base Agulhas Negras salva com sucesso, ID: 41
+username: base_9_senior - user:602senha:d7gV
+Base Inclusão salva com sucesso, ID: 42
+username: base_10_senior - user:603senha:b4wF
+Base Resgate do Cacique da Tribo Krenak salva com sucesso, ID: 43
+username: base_11_senior - user:604senha:hY8M
+Base O Ovo do Rio Tupi salva com sucesso, ID: 44
+username: base_12_senior - user:605senha:m7aM
+Base Pega Vareta salva com sucesso, ID: 45
+username: base_13_senior - user:606senha:H9rt
+Base Agulhas Negras (sust) salva com sucesso, ID: 46
+username: base_14_senior - user:607senha:ct9G
+Base Canções em Movimento salva com sucesso, ID: 47
+username: base_15_senior - user:608senha:a2Pv
+Base Base 15 Senior salva com sucesso, ID: 48
+username: base_1_pioneiro - user:609senha:4wWk
+Base Circuito Areia Puzzle salva com sucesso, ID: 49
+username: base_2_pioneiro - user:610senha:af6H
+Base Desafio das ODSs salva com sucesso, ID: 50
+username: base_3_pioneiro - user:611senha:4vXN
+Base Escotismo & Ação salva com sucesso, ID: 51
+username: base_4_pioneiro - user:612senha:Pj4V
+Base Jenga Pioneiro salva com sucesso, ID: 52
+username: base_5_pioneiro - user:613senha:bSK8
+Base Jogo do Marco salva com sucesso, ID: 53
+username: base_6_pioneiro - user:614senha:j3qY
+Base Match das Virtudes salva com sucesso, ID: 54
+username: base_7_pioneiro - user:615senha:4nAx
+Base Mulheres no Movimento salva com sucesso, ID: 55
+username: base_8_pioneiro - user:616senha:dDt7
+Base Perguntas e Respostas salva com sucesso, ID: 56
+username: base_9_pioneiro - user:617senha:Zh2N
+Base Projeto Pioneiro salva com sucesso, ID: 57
+username: base_10_pioneiro - user:618senha:pWC5
+Base Ramo Pioneiro pelo Mundo salva com sucesso, ID: 58
+username: base_1_todos - user:619senha:Ye8n
+Base Previa salva com sucesso, ID: 59
+finalizado

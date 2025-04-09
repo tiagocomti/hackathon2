@@ -20,10 +20,10 @@ function getAllPontos(){
             if(retorno.status === 200){
                 $('.equipe-total').html(retorno.total);
                 if(retorno.has_base == false){
-                    $("#select_type").val("penalidade");
+                    $("#select_type").val(3);
                     changeContainers("penalidade");
                 }else{
-                    $("#select_type").val("base");
+                    $("#select_type").val(1);
                     changeContainers("base");
                 }
                 if(retorno.role == "part"){

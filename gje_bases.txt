@@ -1,0 +1,59 @@
+1|A Trégua das Águas|Lobinho
+2|Cantando com Akelá|Lobinho
+3|Contos em Imagens|Lobinho
+4|Kim na Jângal|Lobinho
+5|História do Escotismo|Lobinho
+6|Alvo Certo, Resgate Rápido!|Lobinho
+7|Jogo da Memória com Raksha|Lobinho
+8|Sábios como Baloo, seguindo a Trilha da Sabedoria|Lobinho
+9|Os Nós de Kotick|Lobinho
+10|Código KYS|Lobinho
+11|Escoteiro em Movimento (Uniforme Certo)|Lobinho
+12|Em Movimento pelo Futuro do Planeta|Lobinho
+13|Escotismo em Movimento - Território dos Filhotes|Lobinho
+14|Vencendo Obstáculos com Kotick|Lobinho
+15|Conhecendo o Avião|Lobinho
+16|Caça às Canções|Escoteiro
+17|Caça-Palavras do Escotismo|Escoteiro
+18|Revezamento|Escoteiro
+19|Construindo o Futuro|Escoteiro
+20|Kim Olfativo|Escoteiro
+21|Comida Mateira|Escoteiro
+22|Alfabéto Fonético|Escoteiro
+23|Circuito dos Nós|Escoteiro
+24|Caminhando sobre as Águas|Escoteiro
+25|Caixa de Sinais|Escoteiro
+26|Escotismo em Movimento|Escoteiro
+27|Espiritualidade|Escoteiro
+28|Comunicação Através de Bandeiras|Escoteiro
+29|Azimute e Contra Azimute|Escoteiro
+30|Uniforme e Distintivos|Escoteiro
+31|Cultura Escoteira|Escoteiro
+32|Dois na Linha e Um no Gol|Escoteiro
+33|História do Escotismo|Escoteiro
+34|Shark|Senior
+35|Rebocador :: Navio|Senior
+36|Missão Paz e Justiça|Senior
+37|Desafio dos Vales Sagrados|Senior
+38|Pajés e Canibais|Senior
+39|Nhandé Inã :: O Desafio dos Nós|Senior
+40|Yvate Ha Tenondé|Senior
+41|Agulhas Negras|Senior
+42|Inclusão|Senior
+43|Resgate do Cacique da Tribo Krenak|Senior
+44|O Ovo do Rio Tupi|Senior
+45|Pega Vareta|Senior
+46|Agulhas Negras (sust)|Senior
+47|Canções em Movimento|Senior
+48|Base 15 Senior|Senior
+49|Circuito Areia Puzzle|Pioneiro
+50|Desafio das ODSs|Pioneiro
+51|Escotismo & Ação|Pioneiro
+52|Jenga Pioneiro|Pioneiro
+53|Jogo do Marco|Pioneiro
+54|Match das Virtudes|Pioneiro
+55|Mulheres no Movimento|Pioneiro
+56|Perguntas e Respostas|Pioneiro
+57|Projeto Pioneiro|Pioneiro
+58|Ramo Pioneiro pelo Mundo|Pioneiro
+59|Previa|TODOS

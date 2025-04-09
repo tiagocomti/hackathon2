@@ -36,7 +36,7 @@ class DefaultController extends Controller
         $behaviors['corsFilter'] = [
             'class' => \yii\filters\Cors::className(),
             'cors' => [
-                'Origin' => [ 'http://localhost:8100','http://18.217.208.6','https://18.217.208.6','https://18.217.208.6:8080','https://jogodacidade.app','https://apilocal.pontuacao.com.br:4443', 'http://ec2-3-238-118-252.compute-1.amazonaws.com', 'https://ec2-3-238-118-252.compute-1.amazonaws.com'],
+                'Origin' => [ 'http://localhost:8100','http://18.217.208.6','https://18.217.208.6','https://18.217.208.6:8080','https://jogodacidade.app','https://grandejogo.org','https://apilocal.pontuacao.com.br:4443', 'http://ec2-3-238-118-252.compute-1.amazonaws.com', 'https://ec2-3-238-118-252.compute-1.amazonaws.com'],
                 'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
                 'Access-Control-Request-Headers' => ['*'],
                 'Access-Control-Allow-Credentials' => true,
