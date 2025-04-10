@@ -118,7 +118,7 @@ class DataBaseController extends Controller
                 $base = new Bases();
                 $base->id = $id;
                 $base->name = trim($base_name);
-                $base->ramo = strtoupper(trim($ramo_atual));
+                $base->ramo = strtolower(trim($ramo_atual));
                 $base->users = [$user->getId()];
                 if($base->save()){
                     echo "Base ".$base->name." salva com sucesso, ID: ".$base->id;
