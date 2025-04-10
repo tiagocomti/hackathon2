@@ -4,7 +4,7 @@ function getAllPontos(){
     var equipe_id = getUrlParameter("equipe_id");
 
     $.ajax({
-        url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/pontos/get?equipe_id="+equipe_id,
+        url : "https://api.grandejogo.org/api/v1/pontos/get?equipe_id="+equipe_id,
         type : 'GET',
         crossDomain: true,
 
@@ -63,6 +63,11 @@ function getAllPontos(){
             }
             if(xhr.status === 403){
                 alert("Tentando acessar pontos de outra equipe ne? aqui não raqui!!!!");  window.history.back();
+                return false;
+            }
+            if(xhr.status === 400){
+                alert(xhr.responseJSON.message);
+                window.location.href = "/admin/ger-equipes.html";
                 return false;
             }
             alert("Ocorreu um erro, tente novamente ou entre em contato com o administrador do sistema");

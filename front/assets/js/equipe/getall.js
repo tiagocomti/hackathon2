@@ -8,7 +8,7 @@ function searchEquipe(){
     var equipes = [];
 
     $.ajax({
-        url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/equipe/get-all",
+        url : "https://api.grandejogo.org/api/v1/equipe/get-all",
         type : 'GET',
         crossDomain: true,
         
@@ -51,7 +51,7 @@ function getAllEquipes(totais = false){
     $('#spinner_loading').slideDown();
 
     $.ajax({
-        url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/equipe/get-all?totais="+totais,
+        url : "https://api.grandejogo.org/api/v1/equipe/get-all?totais="+totais,
         type : 'GET',
         crossDomain: true,
 

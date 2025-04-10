@@ -7,7 +7,7 @@ function createTarefa(){
     var name = document.getElementById("tarefa").value;
 
       $.ajax({
-            url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/bases/create",
+            url : "https://api.grandejogo.org/api/v1/bases/create",
             type : 'POST',
             crossDomain: true,
             

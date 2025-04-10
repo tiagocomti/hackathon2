@@ -7,7 +7,7 @@ function createEquipe(){
     var name = document.getElementById("equipe").value;
 
       $.ajax({
-            url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/equipe/create",
+            url : "https://api.grandejogo.org/api/v1/equipe/create",
             type : 'POST',
             crossDomain: true,
             

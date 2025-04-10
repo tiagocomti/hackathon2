@@ -154,6 +154,10 @@ class PontosController extends DefaultController
             throw new ForbiddenHttpException("Essa não é sua equipe em amiguinho");
         }
 
+        if($user->isAvaliador() && $user->base->ramo != $equipe->ramo){
+            throw new BadRequestHttpException("Essa equipe não pertence a sua base",33);
+        }
+
         $pontos = [];
         $model = Pontos::find();
         if($user->hasBase() && ($user->isAvaliador())){

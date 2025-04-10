@@ -7,7 +7,7 @@
 //     var id = document.getElementById("id-user").value;
 
 //       $.ajax({
-//             url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/user/get?" + id,
+//             url : "https://api.grandejogo.org/api/v1/user/get?" + id,
 //             type : 'GET',
 //             crossDomain: true,
             

@@ -373,9 +373,9 @@ class EquipeController extends DefaultController
             $equipes[$chave]["num_participantes"] = (is_array($equipe->participantes))?count($equipe->participantes):0;
             $equipes[$chave]["pontos_totais"] = $equipe->getPontos();
         }
-        if($totais) {
+        if($totais ) {
             usort($equipes, function ($a, $b) {
-                return $a['pontos_totais'] <=> $b['pontos_totais'];
+                return $b['pontos_totais'] <=> $a['pontos_totais'];
             });
         }
 

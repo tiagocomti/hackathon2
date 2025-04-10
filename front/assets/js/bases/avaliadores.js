@@ -8,7 +8,7 @@
     var tarefas = [];
 
     $.ajax({
-        url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/bases/get-avaliadores?base_id=" + id,
+        url : "https://api.grandejogo.org/api/v1/bases/get-avaliadores?base_id=" + id,
         type : 'GET',
         crossDomain: true,
         

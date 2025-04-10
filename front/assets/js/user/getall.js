@@ -5,7 +5,7 @@ var token = atob(localtoken);
 var usuarios = [];
 
       $.ajax({
-            url : "https://ec2-3-238-118-252.compute-1.amazonaws.com:65443/api/v1/user/get-all?type=part",
+            url : "https://api.grandejogo.org/api/v1/user/get-all?type=part",
             type : 'GET',
             crossDomain: true,
 
