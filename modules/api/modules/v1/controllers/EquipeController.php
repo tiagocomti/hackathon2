@@ -360,6 +360,7 @@ class EquipeController extends DefaultController
         $this->justStaff();
         $equipes = [];
         if($user->base && $user->base->ramo && $user->base->ramo != "TODOS"){
+
             $where = ["ramo" => $user->base->ramo];
         }
 

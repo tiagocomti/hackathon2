@@ -155,7 +155,7 @@ class PontosController extends DefaultController
         }
 
         if($user->isAvaliador() && $user->base->ramo != $equipe->ramo){
-            throw new BadRequestHttpException("Essa equipe não pertence a sua base",33);
+//            throw new BadRequestHttpException("Essa equipe não pertence a sua base",33);
         }
 
         $pontos = [];
